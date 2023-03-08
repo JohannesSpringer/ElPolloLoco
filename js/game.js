@@ -1,11 +1,10 @@
 let canvas;
 let ctx;
-let character = new Image();
+let character = new MovableObject();
 
 function init() {
-    canvas = document.getElementById('');
-    ctx = canvas.getContext('2d');
-    character.src = '../img/2_character_pepe/2_walk/W-21.png';
+    //canvas = document.getElementById('');
+    //ctx = canvas.getContext('2d');
 
-    ctx.drawImage(character, 50, 50, 50, 100);
+    console.log('My Character is', character);
 }
