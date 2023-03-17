@@ -11,10 +11,6 @@ class Cloud extends MovableObject {
     }
 
     animate() {
-        setInterval(() => {
-            this.x -= 0.1;
-            if (this.x < -this.width) this.x = canvas.width;
-        }, 1000 / 60);
-        
+        this.moveLeft();
     }
 }
