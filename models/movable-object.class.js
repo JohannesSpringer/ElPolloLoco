@@ -42,20 +42,21 @@ class MovableObject {
     }
 
     playAnimation(images) {
-        let i = this.currentImage % this.IMAGES_WALKING.length;
+        let i = this.currentImage % images.length;
         let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++;
     }
 
     moveRight() {
-        console.log('Moving Right');
+        this.x += this.speed;
     }
 
     moveLeft() {
-        setInterval(() => {
-            this.x -= this.speed;
-            if (this.x < -this.width) this.x = canvas.width;
-        }, 1000 / 60);
+        this.x -= this.speed;
+    }
+
+    jump() {
+        this.speedY = -30;
     }
 }
