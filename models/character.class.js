@@ -41,6 +41,15 @@ class Character extends MovableObject {
         'img/2_character_pepe/4_hurt/H-43.png'
     ];
 
+    IMAGES_STATUSBAR_HEALTH = [
+        'img/7_statusbars/1_statusbar/2_statusbar_health/blue/0.png',
+        'img/7_statusbars/1_statusbar/2_statusbar_health/blue/20.png',
+        'img/7_statusbars/1_statusbar/2_statusbar_health/blue/40.png',
+        'img/7_statusbars/1_statusbar/2_statusbar_health/blue/60.png',
+        'img/7_statusbars/1_statusbar/2_statusbar_health/blue/80.png',
+        'img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png'
+    ];
+
     world;
     running_sound = new Audio('audio/running.mp3');
 

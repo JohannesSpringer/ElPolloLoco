@@ -1,11 +1,4 @@
-class MovableObject {
-    x = 120;
-    y = 250;
-    img;
-    height = 150;
-    width = 100;
-    imageCache = {};
-    currentImage = 0;
+class MovableObject extends DrawableObject {
     speed = 0.15;
     otherDirection = false;
     speedY = 0;
@@ -24,15 +17,6 @@ class MovableObject {
 
     isAboveGround() {
         return this.y < 130;
-    }
-
-    loadImage(path) {
-        this.img = new Image();
-        this.img.src = path;
-    }
-
-    draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
     drawFrame(ctx) {
@@ -64,23 +48,11 @@ class MovableObject {
 
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit; // time difference in ms
-        return timepassed < 1500; // Wenn innerhalb der letzten 5000ms getroffen, dann true
+        return timepassed < 1500; // Wenn innerhalb der letzten 1500ms getroffen, dann true
     }
 
     isDead() {
         return this.energy == 0;
-    }
-
-    /**
-     * 
-     * @param {JSON} arr - ['img/image1.png', 'img/image2.png', ...] 
-     */
-    loadImages(arr) {
-        arr.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        })
     }
 
     playAnimation(images) {
