@@ -1,6 +1,7 @@
 class World {
     character = new Character();
     statusBar = new StatusBar();
+    throwableObjects = [];
     level = level1;
     canvas;
     ctx;
@@ -13,25 +14,34 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollisions();
+        this.run();
     }
 
     setWorld() {
         this.character.world = this;
-        this.statusBar.world = this;
+    }
+
+    run() {
+        setInterval(() => {
+            this.checkCollisions();
+            this.checkThrowObjects();
+        }, 200);
+    }
+
+    checkThrowObjects() {
+        if (this.keyboard.CTRL) {
+            let bottle = new ThrowableObject(this.character.x + 90, this.character.y + 130);
+            this.throwableObjects.push(bottle);
+        }
     }
 
     checkCollisions() {
-        setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy)) {
-                    this.character.hit();
-                }
-            });
-            if (this.character.isDead()) {
-                console.log('Character dead');
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
+                this.character.hit();
+                this.statusBar.setPercentage(this.character.energy);
             }
-        }, 200);
+        });
     }
 
     draw() {
@@ -43,9 +53,11 @@ class World {
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.character);
-        this.addToMap(this.statusBar);
+        
+        this.addObjectsToMap(this.throwableObjects);
 
         this.ctx.translate(-this.camera_x, 0);
+        this.addToMap(this.statusBar);
 
         // draw() wird dauerhaft aufgerufen
         let self = this;
