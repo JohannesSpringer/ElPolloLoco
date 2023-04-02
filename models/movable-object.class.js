@@ -72,4 +72,17 @@ class MovableObject extends DrawableObject {
     setTimerLastAction() {
         this.timeLastAction = new Date().getTime();
     }
+
+    hitChicken(mo) {
+        return this.x + this.width > mo.x &&
+            this.y + this.height > mo.y &&
+            this.x < mo.x + mo.width &&
+            this.y < mo.y + mo.height;
+    }
+
+    isOverEnemy(enemy) {
+        return this.y + this.height < enemy.y &&
+            this.x + this.width > enemy.x &&
+            this.x < enemy.x + enemy.width;
+    }
 }
