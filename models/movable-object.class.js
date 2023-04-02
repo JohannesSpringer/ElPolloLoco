@@ -5,6 +5,7 @@ class MovableObject extends DrawableObject {
     acceleration = -2.5;
     energy = 100;
     lastHit = 0;
+    timeLastAction = new Date().getTime();
 
     applyGravitiy() {
         setInterval(() => {
@@ -66,5 +67,9 @@ class MovableObject extends DrawableObject {
 
     jump() {
         this.speedY = -30;
+    }
+
+    setTimerLastAction() {
+        this.timeLastAction = new Date().getTime();
     }
 }
