@@ -17,7 +17,7 @@ class MovableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        if (this instanceof ThrowableObject) { // Throwable object should always fall
+        if (this instanceof ThrowableObject || this.isDead()) { // Throwable object should always fall and dead character
             return true;
         } else {
             return this.y < 130;

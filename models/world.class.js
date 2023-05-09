@@ -42,7 +42,7 @@ class World {
             } else if (this.character.isColliding(enemy) && enemy.isInDanger) {
                 enemy.kill(this.level);
                 this.character.jump();
-            } else if (this.character.isColliding(enemy) && !enemy.isDead()) {
+            } else if (this.character.isColliding(enemy) && !this.character.isDead() && !enemy.isDead()) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
              } else {

@@ -112,9 +112,11 @@ class Character extends MovableObject {
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
-        setInterval(() => {
+        let intId = setInterval(() => {
             if (this.isDead()) {
+                this.speedY = -15;
                 this.playAnimation(this.IMAGES_DEAD);
+                if (this.currentImage = this.IMAGES_DEAD.length) clearInterval(intId);
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isAboveGround()) {
@@ -134,6 +136,6 @@ class Character extends MovableObject {
                 }
 
             }
-        }, 1000 / 20);
+        }, 100);
     }
 }
