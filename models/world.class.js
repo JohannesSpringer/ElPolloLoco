@@ -40,23 +40,15 @@ class World {
             if (this.character.isOverEnemy(enemy) && !enemy.isDead()) {
                 enemy.isInDanger = true;
             } else if (this.character.isColliding(enemy) && enemy.isInDanger) {
-                enemy.kill();
-                this.deleteEnemy(enemy);
+                enemy.kill(this.level);
+                this.character.jump();
             } else if (this.character.isColliding(enemy) && !enemy.isDead()) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
              } else {
                 enemy.isInDanger = false;
             }
-
         });
-    }
-
-    deleteEnemy(enemy) {
-        console.log('Gegner Chicken: ',enemy);
-        setTimeout(() => {
-            this.level.enemies.splice(this.level.enemies.indexOf(enemy), 1);
-        }, 500);
     }
 
     draw() {

@@ -20,27 +20,33 @@ class Chicken extends MovableObject {
         this.speed = 0.15 + Math.random() * 0.25;
 
         this.animate();
-    }
+    };
 
     animate() {
         setInterval(() => {
             if (!this.isDead()) {
                 this.playAnimation(this.IMAGES_WALKING);
-                //this.img = this.IMAGE_DEAD;
             }
         }, 1000 / 5);
         setInterval(() => {
             if (!this.isDead()) {
                 this.moveLeft();
             }
-            //if (this.x < -this.width) this.x = canvas.width;
         }, 1000 / 60);
 
-    }
+    };
 
-    kill() {
+    kill(lvl) {
         this.energy = 0;
         this.img = this.IMAGE_DEAD;
         this.loadImage(this.IMAGE_DEAD);
-    }
+
+        setTimeout(() => {
+            lvl.enemies.forEach(enemy => {
+                if (enemy.energy == 0) {
+                    lvl.enemies.splice(lvl.enemies.indexOf(enemy), 1);
+                }
+            });
+        }, 500);
+    };
 }
