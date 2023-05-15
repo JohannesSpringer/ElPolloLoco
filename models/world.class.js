@@ -1,6 +1,8 @@
 class World {
     character = new Character();
-    statusBar = new StatusBar();
+    statusBarHealth = new StatusBarHealth();
+    StatusBarCoins = new StatusBarCoins();
+    statusBarBottles = new StatusBarBottles();
     throwableObjects = [];
     level = level1;
     canvas;
@@ -44,7 +46,7 @@ class World {
                 this.character.jump();
             } else if (this.character.isColliding(enemy) && !this.character.isDead() && !enemy.isDead()) {
                 this.character.hit();
-                this.statusBar.setPercentage(this.character.energy);
+                this.statusBarHealth.setPercentage(this.character.energy);
              } else {
                 enemy.isInDanger = false;
             }
@@ -64,7 +66,9 @@ class World {
         this.addObjectsToMap(this.throwableObjects);
 
         this.ctx.translate(-this.camera_x, 0);
-        this.addToMap(this.statusBar);
+        this.addToMap(this.statusBarHealth);
+        this.addToMap(this.StatusBarCoins);
+        this.addToMap(this.statusBarBottles);
 
         // draw() wird dauerhaft aufgerufen
         let self = this;
