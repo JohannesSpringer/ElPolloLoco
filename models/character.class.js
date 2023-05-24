@@ -4,6 +4,12 @@ class Character extends MovableObject {
     x = 60;
     y = 0;
     speed = 10;
+    inventory = {
+        'bottle': 0,
+        'coin': 0
+    }
+    MAX_BOTTLES = 0;
+    MAX_COINS = 0;
 
     IMAGES_IDLE = [
         'img/2_character_pepe/1_idle/idle/I-1.png',
@@ -90,6 +96,16 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.applyGravitiy();
         this.animate();
+    }
+
+    addToInventory(item) {
+        this.inventory[item]++;
+        console.log(this.inventory);
+        if (item == 'bottle') {
+            this.world.statusBarBottles.setPercentage(this.inventory['bottle'] / this.MAX_BOTTLES * 100);
+        } else if (item == 'coin') {
+            this.world.statusBarCoins.setPercentage(this.inventory['coin'] / this.MAX_COINS * 100);
+        }
     }
 
     animate() {

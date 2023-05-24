@@ -27,9 +27,9 @@ class MovableObject extends DrawableObject {
     // character.isColliding(chicken);
     isColliding(mo) {
         return this.x + this.width > mo.x &&
-            this.y + this.height > mo.y &&
+            this.y + 120 + this.height - 120 > mo.y && // +120 correct empty space in character image on top
             this.x < mo.x + mo.width &&
-            this.y < mo.y + mo.height;
+            this.y + 120 < mo.y + mo.height;
     }
 
     hit() {
@@ -85,4 +85,18 @@ class MovableObject extends DrawableObject {
             this.x + this.width > enemy.x &&
             this.x < enemy.x + enemy.width;
     }
+
+    kill(lvl) {
+        this.energy = 0;
+        this.img = this.IMAGE_DEAD;
+        this.loadImage(this.IMAGE_DEAD);
+
+        setTimeout(() => {
+            lvl.enemies.forEach(enemy => {
+                if (enemy.energy == 0) {
+                    lvl.enemies.splice(lvl.enemies.indexOf(enemy), 1);
+                }
+            });
+        }, 500);
+    };
 }

@@ -1,7 +1,7 @@
 class World {
     character = new Character();
     statusBarHealth = new StatusBarHealth();
-    StatusBarCoins = new StatusBarCoins();
+    statusBarCoins = new StatusBarCoins();
     statusBarBottles = new StatusBarBottles();
     throwableObjects = [];
     level = level1;
@@ -16,11 +16,19 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
+        this.setLevelMaxItems();
         this.run();
     }
 
     setWorld() {
         this.character.world = this;
+    }
+
+    setLevelMaxItems() {
+        this.level.pickables.forEach((item) => {
+            if (item.NAME == 'bottle') this.character.MAX_BOTTLES++;
+            else if (item.NAME == 'coin') this.character.MAX_COINS++;
+        });
     }
 
     run() {
@@ -51,6 +59,12 @@ class World {
                 enemy.isInDanger = false;
             }
         });
+        this.level.pickables.forEach((item) => {
+            if (this.character.isColliding(item)) {
+                this.character.addToInventory(item.NAME);
+                this.level.pickables.splice(this.level.pickables.indexOf(item), 1);
+            }
+        });
     }
 
     draw() {
@@ -61,13 +75,14 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.pickables);
         this.addToMap(this.character);
 
         this.addObjectsToMap(this.throwableObjects);
 
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBarHealth);
-        this.addToMap(this.StatusBarCoins);
+        this.addToMap(this.statusBarCoins);
         this.addToMap(this.statusBarBottles);
 
         // draw() wird dauerhaft aufgerufen

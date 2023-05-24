@@ -34,18 +34,4 @@ class Chicken extends MovableObject {
         }, 1000 / 60);
 
     };
-
-    kill(lvl) {
-        this.energy = 0;
-        this.img = this.IMAGE_DEAD;
-        this.loadImage(this.IMAGE_DEAD);
-
-        setTimeout(() => {
-            lvl.enemies.forEach(enemy => {
-                if (enemy.energy == 0) {
-                    lvl.enemies.splice(lvl.enemies.indexOf(enemy), 1);
-                }
-            });
-        }, 500);
-    };
 }
