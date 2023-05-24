@@ -53,9 +53,11 @@ class World {
                 enemy.isInDanger = true;
             } else if (this.character.isColliding(enemy) && enemy.isInDanger) {
                 enemy.kill(this.level);
+                this.character.chicken_kill_sound.play();
                 this.character.jump();
             } else if (this.character.isColliding(enemy) && !this.character.isDead() && !enemy.isDead()) {
                 this.character.hit();
+                this.character.get_damage_sound.play();
                 this.statusBarHealth.setPercentage(this.character.energy);
              } else {
                 enemy.isInDanger = false;

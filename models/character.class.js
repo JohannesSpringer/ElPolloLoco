@@ -85,6 +85,11 @@ class Character extends MovableObject {
 
     world;
     running_sound = new Audio('audio/running.mp3');
+    coin_pick_sound = new Audio('audio/coin.mp3');
+    bottle_pick_sound = new Audio('audio/bottle.mp3');
+    chicken_kill_sound = new Audio('audio/chicken.mp3');
+    get_damage_sound = new Audio('audio/damage.mp3');
+    dying_sound = new Audio('audio/dying.mp3');
 
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
@@ -100,12 +105,17 @@ class Character extends MovableObject {
 
     addToInventory(item) {
         this.inventory[item]++;
-        console.log(this.inventory);
+        this.playItemSound(item);
         if (item == 'bottle') {
             this.world.statusBarBottles.setPercentage(this.inventory['bottle'] / this.MAX_BOTTLES * 100);
         } else if (item == 'coin') {
             this.world.statusBarCoins.setPercentage(this.inventory['coin'] / this.MAX_COINS * 100);
         }
+    }
+
+    playItemSound(item) {
+        if (item == 'coin') this.coin_pick_sound.play();
+        else if (item == 'bottle') this.bottle_pick_sound.play();
     }
 
     animate() {
@@ -131,6 +141,7 @@ class Character extends MovableObject {
         let intId = setInterval(() => {
             if (this.isDead()) {
                 this.speedY = -15;
+                this.dying_sound.play();
                 this.playAnimation(this.IMAGES_DEAD);
                 if (this.currentImage = this.IMAGES_DEAD.length) clearInterval(intId);
             } else if (this.isHurt()) {
