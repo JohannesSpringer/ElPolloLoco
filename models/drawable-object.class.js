@@ -22,6 +22,7 @@ class DrawableObject {
         }
     }
 
+    // draw frame to check hitbox
     drawFrame(ctx) {
         if (this instanceof Character || this instanceof Chicken) {
             ctx.beginPath();
