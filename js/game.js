@@ -1,16 +1,32 @@
 let canvas;
 let canvasHeight;
 let world;
+let menu;
 let keyboard = new Keyboard();
+let intro_sound = new Audio('./audio/intro.mp3');
 
 function init() {
     canvas = document.getElementById('canvas');
     canvasHeight = canvas.height;
-    console.log(canvasHeight);
-    world = new World(canvas, keyboard);
+    // menu = new Menu(canvas);
+    // world = new World(canvas, keyboard);
     ctx = canvas.getContext('2d');
+    // setTimeout(playIntro(), 1000);
+    playIntro();
 
-    console.log('My Character is', world.character);
+    // console.log('My Character is', world.character);
+}
+
+function playIntro() {
+    intro_sound.play();
+}
+
+function createWorld() {
+    world = new World(canvas, keyboard);
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('canvas').style.display = 'unset';
+    intro_sound.pause();
+    intro_sound.currentTime = 0;
 }
 
 window.addEventListener("keydown", (event) => {

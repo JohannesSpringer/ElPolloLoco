@@ -90,6 +90,7 @@ class Character extends MovableObject {
     chicken_kill_sound = new Audio('audio/chicken.mp3');
     get_damage_sound = new Audio('audio/damage.mp3');
     dying_sound = new Audio('audio/dying.mp3');
+    jumping_sound = new Audio('audio/jump.mp3');
 
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
@@ -123,6 +124,7 @@ class Character extends MovableObject {
             this.running_sound.pause();
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
+                this.jumping_sound.play();
                 this.setTimerLastAction();
             } else if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
