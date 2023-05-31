@@ -42,8 +42,14 @@ class World {
     checkEndboss() {
         this.level.enemies.forEach(enemy => {
             if (enemy instanceof Endboss) {
+                if (this.character.x < enemy.x - 500) {
+                    enemy.imgId = 'walk';
+                }
                 if (this.character.x > enemy.x - 500) {
                     enemy.imgId = 'alert';
+                }
+                if (this.character.x > enemy.x - 400) {
+                    enemy.attack();
                 }
             }
         });
@@ -72,7 +78,7 @@ class World {
                 this.character.hit();
                 this.character.get_damage_sound.play();
                 this.statusBarHealth.setPercentage(this.character.energy);
-             } else {
+            } else {
                 enemy.isInDanger = false;
             }
         };

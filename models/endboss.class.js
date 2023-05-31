@@ -60,4 +60,10 @@ class Endboss extends MovableObject {
         }, 1000 / 5);
         this.moveLeft();
     }
+
+    attack() {
+        this.speed = 15;
+        this.imgId = 'attack';
+        this.moveLeft();
+    }
 }
