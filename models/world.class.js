@@ -35,7 +35,18 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
+            this.checkEndboss();
         }, 200);
+    }
+
+    checkEndboss() {
+        this.level.enemies.forEach(enemy => {
+            if (enemy instanceof Endboss) {
+                if (this.character.x > enemy.x - 500) {
+                    enemy.imgId = 'alert';
+                }
+            }
+        });
     }
 
     checkThrowObjects() {
