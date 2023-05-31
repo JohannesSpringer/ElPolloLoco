@@ -6,15 +6,22 @@ let keyboard = new Keyboard();
 let intro_sound = new Audio('./audio/intro.mp3');
 
 function init() {
+    renderStartScreen();
     canvas = document.getElementById('canvas');
     canvasHeight = canvas.height;
-    // menu = new Menu(canvas);
-    // world = new World(canvas, keyboard);
     ctx = canvas.getContext('2d');
-    // setTimeout(playIntro(), 1000);
-    playIntro();
+    // todo: play intro at first click on page - deactivated by chrome 66
+    setTimeout(playIntro(), 2000);
+}
 
-    // console.log('My Character is', world.character);
+function renderStartScreen() {
+    let screen = document.getElementById('startScreen');
+    screen.innerHTML = `
+        <img src="./img/9_intro_outro_screens/start/startscreen_1.png" alt="">
+
+        <div class="controls-button" onclick="showControls()">CONTROLS</div>
+        <div class="start-button" onclick="createWorld()">START</div>
+        <div class="options-button" onclick="showOptions()">OPTIONS</div>`;
 }
 
 function playIntro() {
@@ -27,6 +34,53 @@ function createWorld() {
     document.getElementById('canvas').style.display = 'unset';
     intro_sound.pause();
     intro_sound.currentTime = 0;
+}
+
+function showControls() {
+    let screen = document.getElementById('startScreen');
+    screen.innerHTML = '<img src="./img/9_intro_outro_screens/start/startscreen_1.png" alt="">';
+    screen.innerHTML += `
+        <div class="controls">
+            <div class="close-controls" onclick="closeControls()">
+                <img src="./img/icons/x-mark-48.png" alt="">
+            </div>
+            <div class="controls-info">
+                <div class="controls-item">
+                    <img src="./img/icons/arrow-8-48.png" alt="">
+                </div>
+                <div class="controls-description">
+                    Move right
+                </div>
+            </div>
+            <div class="controls-info">
+                <div class="controls-item">
+                    <img src="./img/icons/arrow-66-48.png" alt="">
+                </div>
+                <div class="controls-description">
+                    Move left
+                </div>
+            </div>
+            <div class="controls-info">
+                <div class="controls-item">
+                    SPACE
+                </div>
+                <div class="controls-description">
+                    Jump
+                </div>
+            </div>
+            <div class="controls-info">
+                <div class="controls-item">
+                    STRG
+                </div>
+                <div class="controls-description">
+                    Throw bottle
+                </div>
+            </div>
+        </div>`;
+}
+
+function closeControls() {
+    renderStartScreen();
 }
 
 window.addEventListener("keydown", (event) => {

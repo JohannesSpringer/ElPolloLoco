@@ -48,13 +48,15 @@ class World {
     }
 
     checkCollisions() {
-        this.level.enemies.forEach((enemy) => {
+        for (let i = 0; i < this.level.enemies.length; i++) {
+            const enemy = this.level.enemies[i];
             if (this.character.isOverEnemy(enemy) && !enemy.isDead()) {
                 enemy.isInDanger = true;
             } else if (this.character.isColliding(enemy) && enemy.isInDanger) {
                 enemy.kill(this.level);
                 this.character.chicken_kill_sound.play();
                 this.character.jump();
+                break;
             } else if (this.character.isColliding(enemy) && !this.character.isDead() && !enemy.isDead()) {
                 this.character.hit();
                 this.character.get_damage_sound.play();
@@ -62,7 +64,7 @@ class World {
              } else {
                 enemy.isInDanger = false;
             }
-        });
+        };
         this.level.pickables.forEach((item) => {
             if (this.character.isColliding(item)) {
                 this.character.addToInventory(item.NAME);

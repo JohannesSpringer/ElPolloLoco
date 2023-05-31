@@ -64,6 +64,78 @@ canvas {
     animation: shadow-drop-2-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
+.options-button {
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    top: 20px;
+    right: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    font-weight: bold;
+    color: black;
+    border-radius: 16px;
+    background-color: #ff9c00;
+    cursor: pointer;
+}
+
+.options-button:hover {
+    -webkit-animation: shadow-drop-2-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: shadow-drop-2-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.controls {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+.close-controls {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.controls-info {
+    width: 50%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+}
+
+.controls-item {
+    width: 80px;
+    height: inherit;
+    object-fit: contain;
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.controls-description {
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
 
 @-webkit-keyframes shadow-drop-2-center {
     0% {

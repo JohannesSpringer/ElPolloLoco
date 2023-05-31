@@ -2,7 +2,7 @@ class Character extends MovableObject {
     height = 1200 / 4;
     width = 610 / 4;
     x = 60;
-    y = 0;
+    y = 130;
     speed = 10;
     inventory = {
         'bottle': 0,

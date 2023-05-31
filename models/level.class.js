@@ -20,7 +20,7 @@ class Level {
             if (enemy instanceof Endboss) {
                 enemy.x = this.level_end_x - enemy.width;
             } else {
-                enemy.x = 400 + Math.random() * (level_end_x - 400 - 270); // 270 is width of endboss
+                enemy.x = 600 + Math.random() * (level_end_x - 400 - 270); // 270 is width of endboss
             }
         });
     }
