@@ -6,9 +6,11 @@ class MovableObject extends DrawableObject {
     energy = 100;
     lastHit = 0;
     timeLastAction = new Date().getTime();
+    imgId;
+    intervalGravity;
 
     applyGravitiy() {
-        setInterval(() => {
+        this.intervalGravity = setInterval(() => {
             if (this.isAboveGround() || this.speedY < 0) {
                 this.y += this.speedY;
                 this.speedY -= this.acceleration;

@@ -2,7 +2,6 @@ class Endboss extends MovableObject {
 
     height = 400;
     width = 270;
-    imgId = 'walk';
 
     IMAGES_WALKING = [
         'img/4_enemie_boss_chicken/1_walk/G1.png',
@@ -47,6 +46,7 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.y = 480 - this.height - 30;
         this.speed = 0;
+        this.imgId = 'walk';
 
         this.animate();
     }
@@ -65,5 +65,16 @@ class Endboss extends MovableObject {
         this.speed = 15;
         this.imgId = 'attack';
         this.moveLeft();
+    }
+
+    hitEndboss() {
+        this.energy -= 20;
+        this.imgId = 'hurt';
+    }
+
+    endbossIsHitByBottle(bottle) {
+        return bottle.x + bottle.width > this.x &&
+            bottle.y < this.y + this.height &&
+            bottle.y + bottle.height > this.y;
     }
 }

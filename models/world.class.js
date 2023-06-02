@@ -9,6 +9,8 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
+    throwedBottle;
+    bottleInAir = false;
 
     constructor(canvas, keyboard) {
         this.canvas = canvas;
@@ -51,16 +53,29 @@ class World {
                 if (this.character.x > enemy.x - 400) {
                     enemy.attack();
                 }
+                if (this.throwedBottle != undefined) {
+                    if (enemy.endbossIsHitByBottle(this.throwedBottle)) {
+                        enemy.hitEndboss();
+                        this.throwedBottle.imgId = 'splash';
+                        this.throwedBottle.speed = 0;
+                        setTimeout(() => {
+                            clearInterval(this.throwedBottle.interval);
+                            clearInterval(this.throwedBottle.intervalGravity);
+                        }, 160);
+                    }
+                }
             }
         });
     }
 
     checkThrowObjects() {
-        if (this.keyboard.CTRL && this.character.inventory['bottle'] > 0) {
-            let bottle = new ThrowableObject(this.character.x + 90, this.character.y + 130);
-            this.throwableObjects.push(bottle);
+        if (this.keyboard.CTRL && this.character.inventory['bottle'] > 0 && !this.bottleInAir) {
+            this.throwedBottle = new ThrowableObject(this.character.x + 90, this.character.y + 130);
+            this.throwableObjects.push(this.throwedBottle);
             this.character.inventory['bottle']--;
             this.statusBarBottles.setPercentage(this.character.inventory['bottle'] / this.character.MAX_BOTTLES * 100);
+            this.bottleInAir = true;
+            setTimeout(() => {this.bottleInAir = false}, 1000);
         }
     }
 
