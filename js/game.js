@@ -16,7 +16,6 @@ function init() {
     ctx = canvas.getContext('2d');
     // todo: play intro at first click on page - deactivated by chrome 66
     setTimeout(playIntro(), 1500);
-    toggleMuteAudios();
 }
 
 function renderStartScreen() {

@@ -1,4 +1,5 @@
 class World {
+    intervals = [];
     character = new Character();
     statusBarHealth = new StatusBarHealth();
     statusBarCoins = new StatusBarCoins();
@@ -13,6 +14,8 @@ class World {
     bottleInAir = false;
     audios = {};
     muted;
+    game_over = new DrawableObject();
+    animationFrame;
 
     constructor(canvas, keyboard, muted) {
         this.canvas = canvas;
@@ -24,6 +27,7 @@ class World {
         this.setLevelMaxItems();
         this.addAudios();
         this.run();
+        this.addIntervalsToArray();
     }
 
     setWorld() {
@@ -37,13 +41,21 @@ class World {
         });
     }
 
+    addIntervalsToArray() {
+        this.character.intervals.forEach((int) => {
+            this.intervals.push(int);
+        });
+    }
+
     run() {
-        setInterval(() => {
+        let runInt = setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
             this.checkEndboss();
             this.checkAudios();
+            this.checkCharacater();
         }, 200);
+        this.intervals.push(runInt);
     }
 
     addAudios() {
@@ -61,6 +73,13 @@ class World {
             Object.keys(this.audios).forEach(key => {
                 this.audios[key].muted = false;
             });
+        }
+    }
+
+    checkCharacater() {
+        if (this.character.isDead()) {
+            this.clearLevel();
+            this.showGameOver();
         }
     }
 
@@ -159,7 +178,7 @@ class World {
 
         // draw() wird dauerhaft aufgerufen
         let self = this;
-        requestAnimationFrame(function () {
+        this.animationFrame = requestAnimationFrame(function () {
             self.draw();
         });
     }
@@ -207,5 +226,22 @@ class World {
             i++;
         }
         return backgrounds;
+    }
+
+    clearLevel() {
+        this.level.enemies.splice(0, this.level.enemies.length);
+        this.level.pickables.splice(0, this.level.pickables.length);
+    }
+
+    showGameOver() {
+        cancelAnimationFrame(this.animationFrame);
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        this.game_over.loadImage('./img/9_intro_outro_screens/game_over/oh no you lost!.png');
+        this.game_over.width = this.canvas.width;
+        this.game_over.height = this.canvas.height;
+        this.game_over.x = 0;
+        this.game_over.y = 0;
+        this.game_over.draw(this.ctx);
     }
 }

@@ -10,6 +10,7 @@ class Character extends MovableObject {
     }
     MAX_BOTTLES = 0;
     MAX_COINS = 0;
+    intervals = [];
 
     IMAGES_IDLE = [
         'img/2_character_pepe/1_idle/idle/I-1.png',
@@ -104,6 +105,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.applyGravitiy();
         this.animate();
+        this.intervals.push(this.intervalGravity);
     }
 
     addToInventory(item) {
@@ -122,7 +124,7 @@ class Character extends MovableObject {
     }
 
     animate() {
-        setInterval(() => {
+        let intIdKeyListener = setInterval(() => {
             this.audios.running_sound.pause();
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
@@ -141,6 +143,7 @@ class Character extends MovableObject {
             }
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
+        this.intervals.push(intIdKeyListener);
 
         let intId = setInterval(() => {
             if (this.isDead()) {
@@ -168,5 +171,6 @@ class Character extends MovableObject {
 
             }
         }, 100);
+        this.intervals.push(intId);
     }
 }
