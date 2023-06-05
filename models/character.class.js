@@ -93,13 +93,6 @@ class Character extends MovableObject {
         dying_sound : new Audio('audio/dying.mp3'),
         jumping_sound : new Audio('audio/jump.mp3')
     };
-    // running_sound = new Audio('audio/running.mp3');
-    // coin_pick_sound = new Audio('audio/coin.mp3');
-    // bottle_pick_sound = new Audio('audio/bottle.mp3');
-    // chicken_kill_sound = new Audio('audio/chicken.mp3');
-    // get_damage_sound = new Audio('audio/damage.mp3');
-    // dying_sound = new Audio('audio/dying.mp3');
-    // jumping_sound = new Audio('audio/jump.mp3');
 
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
