@@ -61,6 +61,9 @@ class World {
                         setTimeout(() => {
                             clearInterval(this.throwedBottle.interval);
                             clearInterval(this.throwedBottle.intervalGravity);
+                            this.throwableObjects.splice(0, 1);
+                            this.throwedBottle = undefined;
+                            enemy.imgId = 'alert';
                         }, 160);
                     }
                 }
@@ -75,7 +78,9 @@ class World {
             this.character.inventory['bottle']--;
             this.statusBarBottles.setPercentage(this.character.inventory['bottle'] / this.character.MAX_BOTTLES * 100);
             this.bottleInAir = true;
-            setTimeout(() => {this.bottleInAir = false}, 1000);
+            setTimeout(() => {
+                this.bottleInAir = false;
+            }, 1000); // only throw every 1000ms 1 bottle
         }
     }
 
