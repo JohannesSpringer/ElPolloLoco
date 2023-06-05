@@ -7,13 +7,14 @@ let keyboard = new Keyboard();
 let audios = {
     intro_sound : new Audio('./audio/intro.mp3')
 };
-let muted = true;
+let muted = false;
 
 function init() {
     renderStartScreen();
     canvas = document.getElementById('canvas');
     canvasHeight = canvas.height;
     ctx = canvas.getContext('2d');
+    audios.intro_sound.volume = 0.1;
     // todo: play intro at first click on page - deactivated by chrome 66
     setTimeout(playIntro(), 1500);
 }
@@ -33,6 +34,7 @@ function playIntro() {
 }
 
 function createWorld() {
+    delete(world);
     world = new World(canvas, keyboard, muted);
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('canvas').style.display = 'unset';
@@ -125,13 +127,6 @@ function toggleMuteAudios() {
         audios[key].muted = !muted;
     });
     muted = !muted;
-}
-
-function untoggleMuteAudios() {
-    Object.keys(audios).forEach(key => {
-        audios[key].muted = false;
-    });
-    muted = false;
 }
 
 window.addEventListener("keydown", (event) => {

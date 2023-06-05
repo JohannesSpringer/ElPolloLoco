@@ -121,7 +121,7 @@ class World {
 
     checkThrowObjects() {
         if (this.keyboard.CTRL && this.character.inventory['bottle'] > 0 && !this.bottleInAir) {
-            this.throwedBottle = new ThrowableObject(this.character.x + 90, this.character.y + 130);
+            this.throwedBottle = new ThrowableObject(this.character.x + 90, this.character.y + 130, this.character.otherDirection);
             this.throwableObjects.push(this.throwedBottle);
             this.character.inventory['bottle']--;
             this.statusBarBottles.setPercentage(this.character.inventory['bottle'] / this.character.MAX_BOTTLES * 100);
@@ -233,9 +233,16 @@ class World {
         this.level.pickables.splice(0, this.level.pickables.length);
     }
 
+    clearAllIntervals() {
+        this.intervals.forEach((i) => {
+            clearInterval(i);
+        });
+    }
+
     showGameOver() {
         cancelAnimationFrame(this.animationFrame);
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.addObjectsToMap(this.level.backgroundObjects);
 
         this.game_over.loadImage('./img/9_intro_outro_screens/game_over/oh no you lost!.png');
         this.game_over.width = this.canvas.width;
@@ -243,5 +250,10 @@ class World {
         this.game_over.x = 0;
         this.game_over.y = 0;
         this.game_over.draw(this.ctx);
+        setTimeout(() => {
+            document.getElementById('canvas').style.display = 'none';
+            document.getElementById('startScreen').style.display = 'unset';
+            this.clearAllIntervals();
+        }, 3000);
     }
 }
