@@ -53,7 +53,12 @@ class World {
                 if (this.character.x > enemy.x - 400) {
                     enemy.attack();
                 }
-                if (this.throwedBottle != undefined) {
+                if (enemy.isDead()) {
+                    enemy.imgId = 'dead';
+                    setTimeout(() => {
+                        console.log("Gewonnen");
+                    }, 160);
+                } else if (this.throwedBottle != undefined) {
                     if (enemy.endbossIsHitByBottle(this.throwedBottle)) {
                         enemy.hitEndboss();
                         this.throwedBottle.imgId = 'splash';

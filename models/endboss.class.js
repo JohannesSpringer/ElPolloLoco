@@ -38,12 +38,19 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/4_hurt/G23.png'
     ];
 
+    IMAGES_DEAD = [
+        'img/4_enemie_boss_chicken/5_dead/G24.png',
+        'img/4_enemie_boss_chicken/5_dead/G25.png',
+        'img/4_enemie_boss_chicken/5_dead/G26.png'
+    ];
+
     constructor() {
         super();
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_ALERTING);
         this.loadImages(this.IMAGES_ATTACKING);
         this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_DEAD);
         this.y = 480 - this.height - 30;
         this.speed = 0;
         this.imgId = 'walk';
@@ -57,6 +64,7 @@ class Endboss extends MovableObject {
             if (this.imgId == 'alert') this.playAnimation(this.IMAGES_ALERTING);
             if (this.imgId == 'attack') this.playAnimation(this.IMAGES_ATTACKING);
             if (this.imgId == 'hurt') this.playAnimation(this.IMAGES_HURT);
+            if (this.imgId == 'dead') this.playAnimation(this.IMAGES_DEAD);
         }, 1000 / 5);
         this.moveLeft();
     }
