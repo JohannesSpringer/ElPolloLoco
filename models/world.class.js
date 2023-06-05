@@ -11,14 +11,18 @@ class World {
     camera_x = 0;
     throwedBottle;
     bottleInAir = false;
+    audios = {};
+    muted;
 
-    constructor(canvas, keyboard) {
+    constructor(canvas, keyboard, muted) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         this.keyboard = keyboard;
+        this.muted = muted;
         this.draw();
         this.setWorld();
         this.setLevelMaxItems();
+        this.addAudios();
         this.run();
     }
 
@@ -38,7 +42,26 @@ class World {
             this.checkCollisions();
             this.checkThrowObjects();
             this.checkEndboss();
+            this.checkAudios();
         }, 200);
+    }
+
+    addAudios() {
+        Object.keys(this.character.audios).forEach(key => {
+            this.audios[key] = this.character.audios[key];
+        });
+    }
+
+    checkAudios() {
+        if (this.muted) {
+            Object.keys(this.audios).forEach(key => {
+                this.audios[key].muted = true;
+            });
+        } else {
+            Object.keys(this.audios).forEach(key => {
+                this.audios[key].muted = false;
+            });
+        }
     }
 
     checkEndboss() {
@@ -56,6 +79,7 @@ class World {
                 if (enemy.isDead()) {
                     enemy.imgId = 'dead';
                     setTimeout(() => {
+                        // todo: funktion für Endbildschirm
                         console.log("Gewonnen");
                     }, 160);
                 } else if (this.throwedBottle != undefined) {
@@ -96,12 +120,12 @@ class World {
                 enemy.isInDanger = true;
             } else if (this.character.isColliding(enemy) && enemy.isInDanger) {
                 enemy.kill(this.level);
-                this.character.chicken_kill_sound.play();
+                this.character.audios.chicken_kill_sound.play();
                 this.character.jump();
                 break;
             } else if (this.character.isColliding(enemy) && !this.character.isDead() && !enemy.isDead()) {
                 this.character.hit();
-                this.character.get_damage_sound.play();
+                this.character.audios.get_damage_sound.play();
                 this.statusBarHealth.setPercentage(this.character.energy);
             } else {
                 enemy.isInDanger = false;
