@@ -97,9 +97,11 @@ class World {
                 }
                 if (enemy.isDead()) {
                     enemy.imgId = 'dead';
+                    enemy.currentImage = 0;
                     setTimeout(() => {
                         // todo: funktion für Endbildschirm
                         console.log("Gewonnen");
+                        this.clearAllIntervals();
                     }, 160);
                 } else if (this.throwedBottle != undefined) {
                     if (enemy.endbossIsHitByBottle(this.throwedBottle)) {

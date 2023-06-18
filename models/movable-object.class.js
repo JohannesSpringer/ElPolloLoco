@@ -8,6 +8,7 @@ class MovableObject extends DrawableObject {
     timeLastAction = new Date().getTime();
     imgId;
     intervalGravity;
+    animateInterval;
 
     applyGravitiy() {
         this.intervalGravity = setInterval(() => {
