@@ -242,38 +242,26 @@ class World {
     }
 
     showGameOver() {
-        cancelAnimationFrame(this.animationFrame);
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.addObjectsToMap(this.level.backgroundObjects);
-
-        this.end_screen.loadImage('./img/9_intro_outro_screens/game_over/oh no you lost!.png');
-        this.end_screen.width = this.canvas.width;
-        this.end_screen.height = this.canvas.height;
-        this.end_screen.x = 0;
-        this.end_screen.y = 0;
-        this.end_screen.draw(this.ctx);
-        setTimeout(() => {
-            document.getElementById('canvas').style.display = 'none';
-            document.getElementById('startScreen').style.display = 'unset';
-            this.clearAllIntervals();
-        }, 3000);
+        this.prepareForEndScreen('./img/9_intro_outro_screens/game_over/oh no you lost!.png');
     }
 
     showWin() {
+        this.prepareForEndScreen('./img/icons/medal.png');
+    }
+
+    prepareForEndScreen(img) {
         cancelAnimationFrame(this.animationFrame);
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.addObjectsToMap(this.level.backgroundObjects);
 
-        this.end_screen.loadImage('./img/icons/medal.png');
+        this.end_screen.loadImage(img);
         this.end_screen.width = this.canvas.width;
         this.end_screen.height = this.canvas.height;
         this.end_screen.x = 0;
         this.end_screen.y = 0;
         this.end_screen.draw(this.ctx);
         setTimeout(() => {
-            document.getElementById('canvas').style.display = 'none';
-            document.getElementById('startScreen').style.display = 'unset';
-            this.clearAllIntervals();
+            location.reload();
         }, 3000);
     }
 }

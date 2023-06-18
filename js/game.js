@@ -34,12 +34,22 @@ function playIntro() {
 }
 
 function createWorld() {
-    delete(world);
+    // await delete(world);
+    deleteWorldProperties();
+    console.log('World löschen', world);
     world = new World(canvas, keyboard, muted);
+    console.log('World generiert', world);
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('canvas').style.display = 'unset';
     audios.intro_sound.pause();
     audios.intro_sound.currentTime = 0;
+}
+
+function deleteWorldProperties() {
+    if (world == undefined) return;
+    Object.keys(world).forEach(property => {
+        delete world[property];
+    });
 }
 
 function showControls() {
