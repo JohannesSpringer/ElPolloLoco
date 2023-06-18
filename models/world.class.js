@@ -78,8 +78,10 @@ class World {
 
     checkCharacater() {
         if (this.character.isDead()) {
-            this.clearLevel();
-            this.showGameOver();
+            setTimeout(() => {
+                this.clearLevel();
+                this.showGameOver();
+            }, 2000);
         }
     }
 
