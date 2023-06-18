@@ -14,7 +14,7 @@ class World {
     bottleInAir = false;
     audios = {};
     muted;
-    game_over = new DrawableObject();
+    end_screen = new DrawableObject();
     animationFrame;
     runInt;
 
@@ -246,12 +246,12 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.addObjectsToMap(this.level.backgroundObjects);
 
-        this.game_over.loadImage('./img/9_intro_outro_screens/game_over/oh no you lost!.png');
-        this.game_over.width = this.canvas.width;
-        this.game_over.height = this.canvas.height;
-        this.game_over.x = 0;
-        this.game_over.y = 0;
-        this.game_over.draw(this.ctx);
+        this.end_screen.loadImage('./img/9_intro_outro_screens/game_over/oh no you lost!.png');
+        this.end_screen.width = this.canvas.width;
+        this.end_screen.height = this.canvas.height;
+        this.end_screen.x = 0;
+        this.end_screen.y = 0;
+        this.end_screen.draw(this.ctx);
         setTimeout(() => {
             document.getElementById('canvas').style.display = 'none';
             document.getElementById('startScreen').style.display = 'unset';
@@ -264,12 +264,12 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.addObjectsToMap(this.level.backgroundObjects);
 
-        this.game_over.loadImage('./img/icons/medal.png');
-        this.game_over.width = this.canvas.width;
-        this.game_over.height = this.canvas.height;
-        this.game_over.x = 0;
-        this.game_over.y = 0;
-        this.game_over.draw(this.ctx);
+        this.end_screen.loadImage('./img/icons/medal.png');
+        this.end_screen.width = this.canvas.width;
+        this.end_screen.height = this.canvas.height;
+        this.end_screen.x = 0;
+        this.end_screen.y = 0;
+        this.end_screen.draw(this.ctx);
         setTimeout(() => {
             document.getElementById('canvas').style.display = 'none';
             document.getElementById('startScreen').style.display = 'unset';
