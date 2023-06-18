@@ -102,12 +102,13 @@ class World {
                         // todo: funktion für Endbildschirm
                         console.log("Gewonnen");
                         this.clearAllIntervals();
+                        this.clearLevel();
+                        this.showWin();
                     }, 160);
                 } else if (this.throwedBottle != undefined) {
                     if (enemy.endbossIsHitByBottle(this.throwedBottle)) {
                         enemy.hitEndboss();
                         this.throwedBottle.imgId = 'splash';
-                        this.throwedBottle.speed = 0;
                         setTimeout(() => {
                             clearInterval(this.throwedBottle.interval);
                             clearInterval(this.throwedBottle.intervalGravity);
@@ -256,6 +257,24 @@ class World {
             document.getElementById('canvas').style.display = 'none';
             document.getElementById('startScreen').style.display = 'unset';
             this.clearAllIntervals();
+        }, 3000);
+    }
+
+    showWin() {
+        cancelAnimationFrame(this.animationFrame);
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.addObjectsToMap(this.level.backgroundObjects);
+
+        this.game_over.loadImage('./img/icons/medal.png');
+        this.game_over.width = this.canvas.width;
+        this.game_over.height = this.canvas.height;
+        this.game_over.x = 0;
+        this.game_over.y = 0;
+        this.game_over.draw(this.ctx);
+        setTimeout(() => {
+            document.getElementById('canvas').style.display = 'none';
+            document.getElementById('startScreen').style.display = 'unset';
+            // this.clearAllIntervals();
         }, 3000);
     }
 }
