@@ -81,6 +81,7 @@ class Endboss extends MovableObject {
     hitEndboss() {
         this.energy -= 20;
         this.imgId = 'hurt';
+        if (this.isDead()) this.currentImage = 0;
     }
 
     endbossIsHitByBottle(bottle) {

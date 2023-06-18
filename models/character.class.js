@@ -148,7 +148,6 @@ class Character extends MovableObject {
         let intId = setInterval(() => {
             if (this.isDead()) {
                 this.speedY = -15;
-                // this.applyGravitiy();
                 this.audios.dying_sound.play();
                 this.playAnimation(this.IMAGES_DEAD);
                 clearInterval(intId);

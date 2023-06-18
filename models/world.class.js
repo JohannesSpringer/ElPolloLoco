@@ -16,6 +16,7 @@ class World {
     muted;
     game_over = new DrawableObject();
     animationFrame;
+    runInt;
 
     constructor(canvas, keyboard, muted) {
         this.canvas = canvas;
@@ -48,14 +49,14 @@ class World {
     }
 
     run() {
-        let runInt = setInterval(() => {
+        this.runInt = setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
             this.checkEndboss();
             this.checkAudios();
             this.checkCharacater();
         }, 200);
-        this.intervals.push(runInt);
+        this.intervals.push(this.runInt);
     }
 
     addAudios() {
@@ -81,7 +82,7 @@ class World {
             setTimeout(() => {
                 this.clearLevel();
                 this.showGameOver();
-            }, 2000);
+            }, 1000);
         }
     }
 
@@ -99,14 +100,10 @@ class World {
                 }
                 if (enemy.isDead()) {
                     enemy.imgId = 'dead';
-                    enemy.currentImage = 0;
                     setTimeout(() => {
-                        // todo: funktion für Endbildschirm
-                        console.log("Gewonnen");
-                        this.clearAllIntervals();
                         this.clearLevel();
                         this.showWin();
-                    }, 160);
+                    }, 1000);
                 } else if (this.throwedBottle != undefined) {
                     if (enemy.endbossIsHitByBottle(this.throwedBottle)) {
                         enemy.hitEndboss();
@@ -276,7 +273,7 @@ class World {
         setTimeout(() => {
             document.getElementById('canvas').style.display = 'none';
             document.getElementById('startScreen').style.display = 'unset';
-            // this.clearAllIntervals();
+            this.clearAllIntervals();
         }, 3000);
     }
 }
