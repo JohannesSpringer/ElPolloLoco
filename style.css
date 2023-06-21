@@ -190,7 +190,9 @@ canvas {
 @media only screen and (max-width: 720px) {
     canvas, 
     #startScreen {
-        width: 100%;
+        width: 100% !important;
+        height: unset;
+        aspect-ratio: 3/2 !important;
     }
 
     h1 {
