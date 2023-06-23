@@ -152,6 +152,41 @@ canvas {
     align-items: center;
 }
 
+.overlay {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    height: 64px;
+    width: 100%;
+}
+
+.panel {
+    display: flex;
+    justify-content: space-between;
+    margin: 12px;
+    width: inherit;
+}
+
+.panel-wrapper {
+    display: flex;
+    gap: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.panel-wrapper button {
+    border-radius: 50%;
+    width: 40px;
+    background-color: #A0220A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.panel-wrapper button img {
+    width: 24px;
+}
+
 
 @-webkit-keyframes shadow-drop-2-center {
     0% {
@@ -197,6 +232,10 @@ canvas {
 
     h1 {
         display: none;
+    }
+
+    .overlay {
+        display: flex;
     }
 }
 
