@@ -20,14 +20,14 @@ class Level {
             if (enemy instanceof Endboss) {
                 enemy.x = this.level_end_x - enemy.width;
             } else {
-                enemy.x = 600 + Math.random() * (level_end_x - 900 - 270); // 270 is width of endboss
+                enemy.x = 500 + Math.random() * (level_end_x - 900 - 270); // 270 is width of endboss
             }
         });
     }
 
     placeItemsInLevel() {
         this.pickables.forEach(item => {
-            item.x = 400 + Math.random() * (level_end_x - 400 - 270); // 270 is width of endboss
+            item.x = 400 + Math.random() * (level_end_x - 800 - 270); // 270 is width of endboss
         });
     }
 }
