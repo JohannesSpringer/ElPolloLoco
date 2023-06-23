@@ -37,14 +37,11 @@ canvas {
 }
 
 .start-button {
-    position: absolute;
-    width: 200px;
-    height: 50px;
-    top: 20px;
-    left: calc(360px - 100px);
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 8px;
+    width: 25%;
     font-size: 32px;
     font-weight: bold;
     color: black;
@@ -59,14 +56,11 @@ canvas {
 }
 
 .controls-button {
-    position: absolute;
-    width: 200px;
-    height: 50px;
-    top: 20px;
-    left: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 8px;
+    width: 25%;
     font-size: 32px;
     font-weight: bold;
     color: black;
@@ -81,14 +75,11 @@ canvas {
 }
 
 .options-button {
-    position: absolute;
-    width: 200px;
-    height: 50px;
-    top: 20px;
-    right: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 8px;
+    width: 25%;
     font-size: 32px;
     font-weight: bold;
     color: black;
@@ -185,6 +176,15 @@ canvas {
 
 .panel-wrapper button img {
     width: 24px;
+}
+
+.wrapper {
+    display: flex;
+    position: absolute;
+    top: 0;
+    width: inherit;
+    margin-top: 24px;
+    justify-content: space-around;
 }
 
 

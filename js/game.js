@@ -22,10 +22,11 @@ function renderStartScreen() {
     let screen = document.getElementById('startScreen');
     screen.innerHTML = `
         <img src="./img/9_intro_outro_screens/start/startscreen_1.png" alt="">
-
-        <div class="controls-button" onclick="showControls()">CONTROLS</div>
-        <div class="start-button" onclick="createWorld()">START</div>
-        <div class="options-button" onclick="showSettings()">SETTINGS</div>`;
+        <div class="wrapper">
+            <div class="controls-button" onclick="showControls()">CONTROLS</div>
+            <div class="start-button" onclick="createWorld()">START</div>
+            <div class="options-button" onclick="showSettings()">SETTINGS</div>
+        </div>`;
 }
 
 function playIntro() {
