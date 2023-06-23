@@ -5,7 +5,6 @@ class World {
     statusBarCoins = new StatusBarCoins();
     statusBarBottles = new StatusBarBottles();
     throwableObjects = [];
-    level = level1;
     canvas;
     ctx;
     keyboard;
@@ -15,6 +14,7 @@ class World {
     audios = {};
     muted;
     end_screen = new DrawableObject();
+    level;
     animationFrame;
     runInt;
 
@@ -23,6 +23,7 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.keyboard = keyboard;
         this.muted = muted;
+        this.level = initLvl();
         this.draw();
         this.setWorld();
         this.setLevelMaxItems();

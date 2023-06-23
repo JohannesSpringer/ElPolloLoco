@@ -1,13 +1,12 @@
 let canvas;
 let canvasHeight;
-let world;
-let menu;
 let keyboard = new Keyboard();
-// let intro_sound = new Audio('./audio/intro.mp3');
+let menu;
 let audios = {
     intro_sound : new Audio('./audio/intro.mp3')
 };
 let muted = false;
+let world;
 
 function init() {
     renderStartScreen();
@@ -34,11 +33,7 @@ function playIntro() {
 }
 
 function createWorld() {
-    // await delete(world);
-    deleteWorldProperties();
-    console.log('World löschen', world);
     world = new World(canvas, keyboard, muted);
-    console.log('World generiert', world);
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('canvas').style.display = 'unset';
     audios.intro_sound.pause();
