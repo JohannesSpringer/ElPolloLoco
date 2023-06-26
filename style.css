@@ -29,6 +29,7 @@ canvas {
     height: 480px;
     width: 720px;
     position: relative;
+    overflow: hidden;
 }
 
 #startScreen img {
@@ -225,7 +226,7 @@ canvas {
 @media only screen and (max-width: 720px) {
     canvas, 
     #startScreen {
-        width: 100% !important;
+        width: 100vw !important;
         height: unset;
         aspect-ratio: 3/2 !important;
     }
