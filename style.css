@@ -191,20 +191,19 @@ canvas {
 #ingame-controls {
     display: none;
     justify-content: space-between;
-    width: 720px;
+    width: calc(720px - 16px);
+    padding-left: 8px;
+    padding-right: 8px;
+    transform: translateY(-48px);
 }
 
 .ingame-controls-info {
-    /* width: 50%; */
-    /* height: 60px; */
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
 .ingame-controls-item {
-    /* width: 80px; */
-    /* height: inherit; */
     object-fit: contain;
     color: black;
     font-size: 24px;

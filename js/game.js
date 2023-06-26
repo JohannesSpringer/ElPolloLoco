@@ -14,7 +14,6 @@ function init() {
     canvasHeight = canvas.height;
     ctx = canvas.getContext('2d');
     audios.intro_sound.volume = 0.1;
-    // todo: play intro at first click on page - deactivated by chrome 66
     // Add eventListener for smartphone buttons
     keyboard.bindBtsPressEvents();
     setTimeout(playIntro(), 1500);

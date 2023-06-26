@@ -52,9 +52,10 @@ class World {
     run() {
         this.runInt = setInterval(() => {
             this.checkCollisions();
+            this.checkItemsToPick();
             this.checkThrowObjects();
             this.checkEndboss();
-            this.checkAudios();
+            this.toggleAudios();
             this.checkCharacater();
         }, 200);
         this.intervals.push(this.runInt);
@@ -66,7 +67,7 @@ class World {
         });
     }
 
-    checkAudios() {
+    toggleAudios() {
         if (this.muted) {
             Object.keys(this.audios).forEach(key => {
                 this.audios[key].muted = true;
@@ -90,33 +91,44 @@ class World {
     checkEndboss() {
         this.level.enemies.forEach(enemy => {
             if (enemy instanceof Endboss) {
-                if (this.character.x < enemy.x - 500) {
-                    enemy.imgId = 'walk';
-                }
-                if (this.character.x > enemy.x - 500) {
-                    enemy.imgId = 'alert';
-                }
-                if (this.character.x > enemy.x - 400) {
-                    enemy.attack();
-                }
+                if (this.character.x < enemy.x - 500) enemy.imgId = 'walk';
+                if (this.character.x > enemy.x - 500) enemy.imgId = 'alert';
+                if (this.character.x > enemy.x - 400) enemy.attack();
                 if (enemy.isDead()) {
                     enemy.imgId = 'dead';
-                    setTimeout(() => {
-                        this.clearLevel();
-                        this.showWin();
-                    }, 1000);
+                    this.gameVictory();
                 } else if (this.throwedBottle != undefined) {
                     if (enemy.endbossIsHitByBottle(this.throwedBottle)) {
                         enemy.hitEndboss();
                         this.throwedBottle.imgId = 'splash';
-                        setTimeout(() => {
-                            clearInterval(this.throwedBottle.interval);
-                            clearInterval(this.throwedBottle.intervalGravity);
-                            this.throwableObjects.splice(0, 1);
-                            this.throwedBottle = undefined;
-                        }, 160);
+                        this.showEndbossHitAnimation();
                     }
                 }
+            }
+        });
+    }
+
+    gameVictory() {
+        setTimeout(() => {
+            this.clearLevel();
+            this.showWin();
+        }, 500);
+    }
+
+    showEndbossHitAnimation() {
+        setTimeout(() => {
+            clearInterval(this.throwedBottle.interval);
+            clearInterval(this.throwedBottle.intervalGravity);
+            this.throwableObjects.splice(0, 1);
+            this.throwedBottle = undefined;
+        }, 160);
+    }
+
+    checkItemsToPick() {
+        this.level.pickables.forEach((item) => {
+            if (this.character.isColliding(item)) {
+                this.character.addToInventory(item.NAME);
+                this.level.pickables.splice(this.level.pickables.indexOf(item), 1);
             }
         });
     }
@@ -140,24 +152,26 @@ class World {
             if (this.character.isOverEnemy(enemy) && !enemy.isDead()) {
                 enemy.isInDanger = true;
             } else if (this.character.isColliding(enemy) && enemy.isInDanger) {
-                enemy.kill(this.level);
-                this.character.audios.chicken_kill_sound.play();
-                this.character.jump();
+                this.killEnemy(enemy);
                 break;
             } else if (this.character.isColliding(enemy) && !this.character.isDead() && !enemy.isDead()) {
-                this.character.hit();
-                this.character.audios.get_damage_sound.play();
-                this.statusBarHealth.setPercentage(this.character.energy);
+                this.hitCharacter();
             } else {
                 enemy.isInDanger = false;
             }
         };
-        this.level.pickables.forEach((item) => {
-            if (this.character.isColliding(item)) {
-                this.character.addToInventory(item.NAME);
-                this.level.pickables.splice(this.level.pickables.indexOf(item), 1);
-            }
-        });
+    }
+
+    hitCharacter() {
+        this.character.hit();
+        this.character.audios.get_damage_sound.play();
+        this.statusBarHealth.setPercentage(this.character.energy);
+    }
+
+    killEnemy(e) {
+        e.kill(this.level);
+        this.character.audios.chicken_kill_sound.play();
+        this.character.jump();
     }
 
     draw() {
