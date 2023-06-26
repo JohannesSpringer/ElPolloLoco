@@ -1,6 +1,6 @@
 @font-face {
-    font-family: 'creepster';
-    src: url('fonts/Creepster-Regular.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+    font-family: 'daruma';
+    src: url('fonts/DarumadropOne-Regular.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 } 
 
 body {
@@ -9,7 +9,7 @@ body {
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    font-family: 'creepster', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'daruma', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-image: url('img/5_background/desert.svg');
     background-position: center;
     background-size: cover;
@@ -258,11 +258,11 @@ canvas {
 
 
 /* Smartphones */
-@media only screen and (max-width: 720px) {
+/* @media only screen and (max-width: 1200px) {
     canvas, 
     #startScreen {
         width: 100vw !important;
-        height: unset;
+        height: 100vh;
         aspect-ratio: 3/2 !important;
     }
 
@@ -277,11 +277,31 @@ canvas {
     #ingame-controls {
         display: none !important;
     }
-}
+} */
 
-@media only screen and (max-height: 480px) {
+/* @media only screen and (max-height: 480px) {
     canvas, 
     #startScreen {
         height: 100vh;
+    }
+} */
+
+@media screen and (orientation:landscape) and (max-width: 920px) {
+    canvas, 
+    #startScreen {
+        width: 100vw !important;
+        height: 100vh;
+    }
+
+    #ingame-controls {
+        display: none !important;
+    }
+
+    h1 {
+        display: none;
+    }
+
+    .overlay {
+        display: flex;
     }
 }
