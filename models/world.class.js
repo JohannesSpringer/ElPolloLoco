@@ -114,7 +114,6 @@ class World {
                             clearInterval(this.throwedBottle.intervalGravity);
                             this.throwableObjects.splice(0, 1);
                             this.throwedBottle = undefined;
-                            enemy.imgId = 'alert';
                         }, 160);
                     }
                 }

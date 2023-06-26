@@ -3,7 +3,7 @@ let canvasHeight;
 let keyboard = new Keyboard();
 let menu;
 let audios = {
-    intro_sound : new Audio('./audio/intro.mp3')
+    intro_sound: new Audio('./audio/intro.mp3')
 };
 let muted = false;
 let world;
@@ -39,6 +39,7 @@ function createWorld() {
     world = new World(canvas, keyboard, muted);
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('canvas').style.display = 'unset';
+    document.getElementById('ingame-controls').style.display = 'flex';
     audios.intro_sound.pause();
     audios.intro_sound.currentTime = 0;
 }
@@ -84,7 +85,7 @@ function showControls() {
             </div>
             <div class="controls-info">
                 <div class="controls-item">
-                    STRG
+                    CTRL
                 </div>
                 <div class="controls-description">
                     Throw bottle

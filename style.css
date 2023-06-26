@@ -188,6 +188,42 @@ canvas {
     justify-content: space-around;
 }
 
+#ingame-controls {
+    display: none;
+    justify-content: space-between;
+    width: 720px;
+}
+
+.ingame-controls-info {
+    /* width: 50%; */
+    /* height: 60px; */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ingame-controls-item {
+    /* width: 80px; */
+    /* height: inherit; */
+    object-fit: contain;
+    color: black;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.ingame-controls-description {
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.ingame-controls-item img {
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);;
+}
+
 
 @-webkit-keyframes shadow-drop-2-center {
     0% {
@@ -237,6 +273,10 @@ canvas {
 
     .overlay {
         display: flex;
+    }
+
+    #ingame-controls {
+        display: none !important;
     }
 }
 
