@@ -206,21 +206,30 @@ canvas {
 .ingame-controls-item {
     object-fit: contain;
     color: black;
-    font-size: 24px;
+    font-size: 16px;
     font-weight: bold;
     display: flex;
     align-items: center;
 }
 
 .ingame-controls-description {
-    font-size: 24px;
+    font-size: 16px;
     font-weight: bold;
     display: flex;
     align-items: center;
 }
 
 .ingame-controls-item img {
+    height: 24px;
     filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);;
+}
+
+#hint {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    font-size: 24px;
 }
 
 
@@ -257,35 +266,14 @@ canvas {
 }
 
 
-/* Smartphones */
-/* @media only screen and (max-width: 1200px) {
-    canvas, 
-    #startScreen {
-        width: 100vw !important;
-        height: 100vh;
-        aspect-ratio: 3/2 !important;
-    }
-
-    h1 {
+/* Media Queries */
+@media screen and (min-width: 720px) {
+    #hint {
         display: none;
     }
+}
 
-    .overlay {
-        display: flex;
-    }
-
-    #ingame-controls {
-        display: none !important;
-    }
-} */
-
-/* @media only screen and (max-height: 480px) {
-    canvas, 
-    #startScreen {
-        height: 100vh;
-    }
-} */
-
+/* Smartphones */
 @media screen and (orientation:landscape) and (max-width: 920px) {
     canvas, 
     #startScreen {
@@ -300,6 +288,30 @@ canvas {
     h1 {
         display: none;
     }
+
+    .overlay {
+        display: flex;
+    }
+
+    #hint {
+        display: none;
+    }
+}
+
+@media screen and (orientation:portrait) and (max-width: 720px) {
+    canvas, 
+    #startScreen {
+        width: 100vw !important;
+        height: unset;
+    }
+
+    #ingame-controls {
+        display: none !important;
+    }
+
+    /* h1 {
+        display: none;
+    } */
 
     .overlay {
         display: flex;
