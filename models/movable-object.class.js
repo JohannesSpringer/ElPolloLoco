@@ -29,10 +29,10 @@ class MovableObject extends DrawableObject {
 
     // character.isColliding(chicken);
     isColliding(mo) {
-        return this.x + this.width > mo.x &&
-            this.y + 120 + this.height - 120 > mo.y && // +120 correct empty space in character image on top
-            this.x < mo.x + mo.width &&
-            this.y + 120 < mo.y + mo.height;
+        return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+            this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
+            this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
+            this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
     }
 
     hit() {

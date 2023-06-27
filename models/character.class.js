@@ -4,6 +4,12 @@ class Character extends MovableObject {
     x = 60;
     y = 130;
     speed = 10;
+    offset = {
+        top: 150,
+        left: 45,
+        right: 45,
+        bottom: 20
+    };
     inventory = {
         'bottle': 0,
         'coin': 0

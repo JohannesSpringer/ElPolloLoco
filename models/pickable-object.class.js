@@ -1,6 +1,12 @@
 class PickableObject extends DrawableObject {
     currentImage = 0;
     NAME;
+    offset = {
+        top: 10,
+        left: 30,
+        right: 10,
+        bottom: 10
+    };
 
     IMAGES = [];
 
