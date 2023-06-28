@@ -276,8 +276,13 @@ class World {
         this.end_screen.x = 0;
         this.end_screen.y = 0;
         this.end_screen.draw(this.ctx);
+        document.getElementById('ingame-controls').style.display = 'none';
+
+        this.clearAllIntervals();
+
         setTimeout(() => {
-            location.reload();
+            document.getElementById('startScreen').style.display = 'block';
+            document.getElementById('canvas').style.display = 'none';
         }, 3000);
     }
 }
