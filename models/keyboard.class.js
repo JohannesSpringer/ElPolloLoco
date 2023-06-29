@@ -12,6 +12,13 @@ class Keyboard {
     }
 
     bindBtsPressEvents() {
+        this.keyLeft();
+        this.keyRight();
+        this.keySpace();
+        this.keyD();
+    }
+
+    keyLeft() {
         document.getElementById('btnLeft').addEventListener('touchstart', (e) => {
             e.preventDefault();
             this.LEFT = true;
@@ -21,7 +28,9 @@ class Keyboard {
             e.preventDefault();
             this.LEFT = false;
         });
+    }
 
+    keyRight() {
         document.getElementById('btnRight').addEventListener('touchstart', (e) => {
             e.preventDefault();
             this.RIGHT = true;
@@ -31,7 +40,9 @@ class Keyboard {
             e.preventDefault();
             this.RIGHT = false;
         });
+    }
 
+    keySpace() {
         document.getElementById('btnJump').addEventListener('touchstart', (e) => {
             e.preventDefault();
             this.SPACE = true;
@@ -41,7 +52,9 @@ class Keyboard {
             e.preventDefault();
             this.SPACE = false;
         });
+    }
 
+    keyD() {
         document.getElementById('btnThrow').addEventListener('touchstart', (e) => {
             e.preventDefault();
             this.D = true;
