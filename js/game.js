@@ -89,7 +89,7 @@ function showControls() {
             </div>
             <div class="controls-info">
                 <div class="controls-item">
-                    CTRL
+                    D
                 </div>
                 <div class="controls-description">
                     Throw bottle

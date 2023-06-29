@@ -44,12 +44,12 @@ class Keyboard {
 
         document.getElementById('btnThrow').addEventListener('touchstart', (e) => {
             e.preventDefault();
-            this.CTRL = true;
+            this.D = true;
         });
 
         document.getElementById('btnThrow').addEventListener('touchend', (e) => {
             e.preventDefault();
-            this.CTRL = false;
+            this.D = false;
         });
     }
 

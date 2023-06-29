@@ -132,7 +132,7 @@ class World {
     }
 
     checkThrowObjects() {
-        if (this.keyboard.CTRL && this.character.inventory['bottle'] > 0 && !this.bottleInAir) {
+        if (this.keyboard.D && this.character.inventory['bottle'] > 0 && !this.bottleInAir) {
             this.throwedBottle = new ThrowableObject(this.character.x + 90, this.character.y + 130, this.character.otherDirection);
             this.throwableObjects.push(this.throwedBottle);
             this.character.inventory['bottle']--;
