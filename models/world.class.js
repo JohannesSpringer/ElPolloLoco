@@ -96,14 +96,18 @@ class World {
                     enemy.imgId = 'dead';
                     this.gameVictory();
                 } else if (this.throwedBottle != undefined) {
-                    if (enemy.endbossIsHitByBottle(this.throwedBottle)) {
-                        enemy.hitEndboss();
-                        this.throwedBottle.imgId = 'splash';
-                        this.showEndbossHitAnimation();
-                    }
+                    this.endbossShot(enemy);
                 }
             }
         });
+    }
+
+    endbossShot(e) {
+        if (e.endbossIsHitByBottle(this.throwedBottle)) {
+            e.hitEndboss();
+            this.throwedBottle.imgId = 'splash';
+            this.showEndbossHitAnimation();
+        }
     }
 
     gameVictory() {
@@ -174,7 +178,6 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.backgroundObjects);
@@ -208,8 +211,6 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        // mo.drawFrame(this.ctx);
-        // mo.drawSmallFrame(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);
@@ -269,7 +270,12 @@ class World {
         cancelAnimationFrame(this.animationFrame);
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.addObjectsToMap(this.level.backgroundObjects);
+        this.confEndScreen(img);
+        this.clearAllIntervals();
+        this.changeScreen();
+    }
 
+    confEndScreen(img) {
         this.end_screen.loadImage(img);
         this.end_screen.width = this.canvas.width;
         this.end_screen.height = this.canvas.height;
@@ -277,9 +283,9 @@ class World {
         this.end_screen.y = 0;
         this.end_screen.draw(this.ctx);
         document.getElementById('ingame-controls').style.display = 'none';
+    }
 
-        this.clearAllIntervals();
-
+    changeScreen() {
         setTimeout(() => {
             document.getElementById('startScreen').style.display = 'block';
             document.getElementById('canvas').style.display = 'none';

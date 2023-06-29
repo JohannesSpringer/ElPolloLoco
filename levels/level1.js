@@ -2,56 +2,9 @@ let level1;
 
 function initLvl() {
     return level1 = new Level(
-        [
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
-            new SmallChicken(),
-            new SmallChicken(),
-            new SmallChicken(),
-            new SmallChicken(),
-            new SmallChicken(),
-            new SmallChicken(),
-            new SmallChicken(),
-            new Endboss()
-        ],
-        [
-            new PickableObject('coin'),
-            new PickableObject('coin'),
-            new PickableObject('coin'),
-            new PickableObject('coin'),
-            new PickableObject('coin'),
-            new PickableObject('coin'),
-            new PickableObject('coin'),
-            new PickableObject('coin'),
-            new PickableObject('coin'),
-            new PickableObject('coin'),
-            new PickableObject('coin'),
-            new PickableObject('coin'),
-            new PickableObject('coin'),
-            new PickableObject('coin'),
-            new PickableObject('coin'),
-            new PickableObject('coin'),
-            new PickableObject('coin'),
-            new PickableObject('coin'),
-            new PickableObject('coin'),
-            new PickableObject('coin'),
-            new PickableObject('bottle'),
-            new PickableObject('bottle'),
-            new PickableObject('bottle'),
-            new PickableObject('bottle'),
-            new PickableObject('bottle'),
-            new PickableObject('bottle'),
-            new PickableObject('bottle'),
-            new PickableObject('bottle')
-        ],
-        [
-            new Cloud()
-        ],
+        getEnemies(),
+        getPickables(),
+        getClouds(),
         getBackrounds(),
         level_end_x = 5100
     )
@@ -71,4 +24,70 @@ function getBackrounds() {
         i++;
     }
     return backgrounds;
+}
+
+function getEnemies() {
+    return [
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new SmallChicken(),
+        new SmallChicken(),
+        new SmallChicken(),
+        new SmallChicken(),
+        new SmallChicken(),
+        new SmallChicken(),
+        new SmallChicken(),
+        new Endboss()
+    ];
+}
+
+function getPickables() {
+    return [
+        new PickableObject('coin'),
+        new PickableObject('coin'),
+        new PickableObject('coin'),
+        new PickableObject('coin'),
+        new PickableObject('coin'),
+        new PickableObject('coin'),
+        new PickableObject('coin'),
+        new PickableObject('coin'),
+        new PickableObject('coin'),
+        new PickableObject('coin'),
+        new PickableObject('coin'),
+        new PickableObject('coin'),
+        new PickableObject('coin'),
+        new PickableObject('coin'),
+        new PickableObject('coin'),
+        new PickableObject('coin'),
+        new PickableObject('coin'),
+        new PickableObject('coin'),
+        new PickableObject('coin'),
+        new PickableObject('coin'),
+        new PickableObject('bottle'),
+        new PickableObject('bottle'),
+        new PickableObject('bottle'),
+        new PickableObject('bottle'),
+        new PickableObject('bottle'),
+        new PickableObject('bottle'),
+        new PickableObject('bottle'),
+        new PickableObject('bottle')
+    ];
+}
+
+function getClouds() {
+    return [
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud()
+    ];
 }

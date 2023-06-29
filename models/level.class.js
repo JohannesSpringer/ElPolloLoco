@@ -13,6 +13,7 @@ class Level {
         this.level_end_x = level_end_x;
         this.placeEnemiesInLevel();
         this.placeItemsInLevel();
+        this.placeCloudsInLevel();
     }
 
     placeEnemiesInLevel() {
@@ -29,5 +30,12 @@ class Level {
         this.pickables.forEach(item => {
             item.x = 400 + Math.random() * (level_end_x - 800 - 270); // 270 is width of endboss
         });
+    }
+
+    placeCloudsInLevel() {
+        for (let i = 0; i < this.clouds.length; i++) {
+            const cloud = this.clouds[i];
+            cloud.x = 100 + i * 720;
+        }
     }
 }
