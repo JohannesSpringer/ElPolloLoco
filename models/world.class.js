@@ -12,17 +12,15 @@ class World {
     throwedBottle;
     bottleInAir = false;
     audios = {};
-    muted;
     end_screen = new DrawableObject();
     level;
     animationFrame;
     runInt;
 
-    constructor(canvas, keyboard, muted) {
+    constructor(canvas, keyboard) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         this.keyboard = keyboard;
-        this.muted = muted;
         this.level = initLvl();
         this.draw();
         this.setWorld();
@@ -68,7 +66,7 @@ class World {
     }
 
     toggleAudios() {
-        if (this.muted) {
+        if (muted) {
             Object.keys(this.audios).forEach(key => {
                 this.audios[key].muted = true;
             });
@@ -259,10 +257,12 @@ class World {
 
     showGameOver() {
         this.prepareForEndScreen('./img/9_intro_outro_screens/game_over/oh no you lost!.png');
+        document.getElementById('muteButton').innerHTML = '';
     }
 
     showWin() {
         this.prepareForEndScreen('./img/icons/medal.png');
+        document.getElementById('muteButton').innerHTML = '';
     }
 
     prepareForEndScreen(img) {

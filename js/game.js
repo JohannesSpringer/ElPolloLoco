@@ -7,6 +7,10 @@ let audios = {
 };
 let muted = false;
 let world;
+let muteIds = [
+    'audioImg',
+    'audioImgIngame'
+];
 
 function init() {
     renderStartScreen();
@@ -35,10 +39,11 @@ function playIntro() {
 }
 
 function createWorld() {
-    world = new World(canvas, keyboard, muted);
+    world = new World(canvas, keyboard);
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('canvas').style.display = 'unset';
     document.getElementById('ingame-controls').style.display = 'flex';
+    renderMuteButton();
     audios.intro_sound.pause();
     audios.intro_sound.currentTime = 0;
 }
@@ -107,7 +112,7 @@ function showSettings() {
             </div>
             <div class="controls-info">
                 <div class="controls-item">
-                    ${checkActiveSettings()}
+                    ${checkActiveMuteSettings()}
                 </div>
                 <div class="controls-description">
                     Sounds
@@ -116,7 +121,11 @@ function showSettings() {
         </div>`;
 }
 
-function checkActiveSettings() {
+function renderMuteButton() {
+    document.getElementById('muteButton').innerHTML = checkActiveMuteSettings();
+}
+
+function checkActiveMuteSettings() {
     if (muted) {
         return `<img id="audioImg" src="./img/icons/mute-2-48.png" alt="" style="cursor: pointer" onclick="toggleAudio()"></img>`;
     } else {
@@ -125,10 +134,22 @@ function checkActiveSettings() {
 }
 
 function toggleAudio() {
-    if (muted) document.getElementById('audioImg').src = './img/icons/speaker-48.png';
-    else document.getElementById('audioImg').src = './img/icons/mute-2-48.png';
+    if (muted) {
+        muteIds.forEach(id => {
+            try {document.getElementById(id).src = './img/icons/speaker-48.png'}
+            catch(err) {return}
+        });
+    }
+    else {
+        muteIds.forEach(id => {
+            try {document.getElementById(id).src = './img/icons/mute-2-48.png'}
+            catch(err) {return}
+        });
+    }
     toggleMuteAudios();
 }
+
+
 
 function toggleMuteAudios() {
     Object.keys(audios).forEach(key => {
