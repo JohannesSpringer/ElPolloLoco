@@ -61,6 +61,9 @@ function createWorld() {
     audios.intro_sound.currentTime = 0;
 }
 
+/**
+ * html template for controls info
+ */
 function showControls() {
     let screen = document.getElementById('startScreen');
     screen.innerHTML = '<img src="./img/9_intro_outro_screens/start/startscreen_1.png" alt="">';
@@ -108,6 +111,9 @@ function renderStart() {
     renderStartScreen();
 }
 
+/**
+ * html template for settings
+ */
 function showSettings() {
     let screen = document.getElementById('startScreen');
     screen.innerHTML = '<img src="./img/9_intro_outro_screens/start/startscreen_1.png" alt="">';
@@ -127,10 +133,17 @@ function showSettings() {
         </div>`;
 }
 
+/**
+ * Render mute button ingame with mute / speaker icon
+ */
 function renderMuteButton() {
     document.getElementById('muteButton').innerHTML = checkActiveMuteSettings();
 }
 
+/**
+ * check if sound was already mute or unmuted again and change mute sound icon
+ * @returns html template for icon
+ */
 function checkActiveMuteSettings() {
     if (muted) {
         return `<img id="audioImg" src="./img/icons/mute-2-48.png" alt="" style="cursor: pointer" onclick="toggleAudio()"></img>`;
@@ -139,6 +152,10 @@ function checkActiveMuteSettings() {
     }
 }
 
+/**
+ * change sound icon in setting screen and ingame
+ * only one of both id's is available in html -> try catch needed
+ */
 function toggleAudio() {
     if (muted) {
         muteIds.forEach(id => {
@@ -155,8 +172,9 @@ function toggleAudio() {
     toggleMuteAudios();
 }
 
-
-
+/**
+ * toggle sound mute / unmuted
+ */
 function toggleMuteAudios() {
     Object.keys(audios).forEach(key => {
         audios[key].muted = !muted;
