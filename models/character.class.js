@@ -114,6 +114,10 @@ class Character extends MovableObject {
         this.intervals.push(this.intervalGravity);
     }
 
+    /**
+     * add pickable objects to characters inventory
+     * @param {PickableObject} item 
+     */
     addToInventory(item) {
         this.inventory[item]++;
         this.playItemSound(item);
@@ -124,11 +128,18 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     * play sound when item is collected
+     * @param {PickableObject} item 
+     */
     playItemSound(item) {
         if (item == 'coin') this.audios.coin_pick_sound.play();
         else if (item == 'bottle') this.audios.bottle_pick_sound.play();
     }
 
+    /**
+     * generate animation intervals
+     */
     animate() {
         let intIdKeyListener = setInterval(() => {
             this.fastAnimations();
@@ -145,6 +156,9 @@ class Character extends MovableObject {
         return this.world.keyboard.SPACE && !this.isAboveGround();
     }
 
+    /**
+     * character jump action
+     */
     jumping() {
         this.jump();
         this.audios.jumping_sound.play();
@@ -194,6 +208,10 @@ class Character extends MovableObject {
         return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
     }
 
+    /**
+     * animation which need to be displayed for longer time
+     * @param {intervals} intId 
+     */
     slowAnimations(intId) {
         if (this.isDead()) {
             this.killCharacter(intId);
@@ -207,6 +225,9 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     * animation which check keys and controls character
+     */
     fastAnimations() {
         this.audios.running_sound.pause();
             if (this.canJump()) {

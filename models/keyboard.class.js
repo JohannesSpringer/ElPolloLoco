@@ -11,6 +11,9 @@ class Keyboard {
         this.bindKeyPressEvents();
     }
 
+    /**
+     * bind press events for smartphones
+     */
     bindBtsPressEvents() {
         this.keyLeft();
         this.keyRight();
@@ -66,6 +69,9 @@ class Keyboard {
         });
     }
 
+    /**
+     * bind keyboard keys
+     */
     bindKeyPressEvents() {
         window.addEventListener("keydown", (event) => {
             if (event.keyCode == 17) keyboard.CTRL = true;

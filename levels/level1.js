@@ -10,6 +10,10 @@ function initLvl() {
     )
 };
 
+/**
+ * generate backgrounds and place them in horizontal row
+ * @returns all background images with different x position
+ */
 function getBackrounds() {
     let backgrounds = [];
     for (let i = 0; i < 10; i++) {

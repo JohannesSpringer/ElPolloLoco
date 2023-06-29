@@ -26,6 +26,10 @@ class PickableObject extends DrawableObject {
         this.chooseItem();
     }
 
+    /**
+     * place coin or bottle
+     * depends on NAME
+     */
     chooseItem() {
         if (this.NAME == 'coin') {
             this.IMAGES = this.IMAGES_COIN;

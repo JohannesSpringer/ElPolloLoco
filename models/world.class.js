@@ -30,10 +30,16 @@ class World {
         this.addIntervalsToArray();
     }
 
+    /**
+     * set world variable to access it in character class
+     */
     setWorld() {
         this.character.world = this;
     }
 
+    /**
+     * check how many items are created in level
+     */
     setLevelMaxItems() {
         this.level.pickables.forEach((item) => {
             if (item.NAME == 'bottle') this.character.MAX_BOTTLES++;
@@ -47,6 +53,9 @@ class World {
         });
     }
 
+    /**
+     * run playing code
+     */
     run() {
         this.runInt = setInterval(() => {
             this.checkEndboss();
@@ -59,12 +68,18 @@ class World {
         this.intervals.push(this.runInt);
     }
 
+    /**
+     * add audios to global array
+     */
     addAudios() {
         Object.keys(this.character.audios).forEach(key => {
             this.audios[key] = this.character.audios[key];
         });
     }
 
+    /**
+     * toggle sound mute / unmuted in gameplay
+     */
     toggleAudios() {
         if (muted) {
             Object.keys(this.audios).forEach(key => {
@@ -77,6 +92,9 @@ class World {
         }
     }
 
+    /**
+     * check energy of character
+     */
     checkCharacater() {
         if (this.character.isDead()) {
             setTimeout(() => {
@@ -86,6 +104,9 @@ class World {
         }
     }
 
+    /**
+     * check endboss status and set imgId for special situations to animate other movements
+     */
     checkEndboss() {
         this.level.enemies.forEach(enemy => {
             if (enemy instanceof Endboss) {
@@ -102,6 +123,10 @@ class World {
         });
     }
 
+    /**
+     * animate endboss hit and bottle splash
+     * @param {Endboss} e 
+     */
     endbossShot(e) {
         if (e.endbossIsHitByBottle(this.throwedBottle)) {
             e.hitEndboss();
@@ -110,6 +135,9 @@ class World {
         }
     }
 
+    /**
+     * show game victory
+     */
     gameVictory() {
         setTimeout(() => {
             this.clearLevel();
@@ -117,6 +145,9 @@ class World {
         }, 500);
     }
 
+    /**
+     * animate endboss hit
+     */
     showEndbossHitAnimation() {
         setTimeout(() => {
             clearInterval(this.throwedBottle.interval);
@@ -126,6 +157,9 @@ class World {
         }, 90);
     }
 
+    /**
+     * check if item can be picked from character
+     */
     checkItemsToPick() {
         this.level.pickables.forEach((item) => {
             if (this.character.isColliding(item)) {
@@ -135,6 +169,9 @@ class World {
         });
     }
 
+    /**
+     * throw bottles - minimum 500ms waiting time to throw next
+     */
     checkThrowObjects() {
         if (this.keyboard.D && this.character.inventory['bottle'] > 0 && !this.bottleInAir) {
             this.throwedBottle = new ThrowableObject(this.character.x + 90, this.character.y + 130, this.character.otherDirection);
@@ -148,6 +185,10 @@ class World {
         }
     }
 
+    /**
+     * 
+     * @returns collision between character and enemy
+     */
     checkCollisions() {
         for (let i = 0; i < this.level.enemies.length; i++) {
             const enemy = this.level.enemies[i];
@@ -176,6 +217,9 @@ class World {
         this.character.jump();
     }
 
+    /**
+     * draw all objects to canvas and call it in loop
+     */
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
@@ -206,6 +250,10 @@ class World {
         });
     }
 
+    /**
+     * add single object to map and check direction
+     * @param {MovableObject} mo 
+     */
     addToMap(mo) {
         if (mo.otherDirection) {
             this.flipImage(mo);
@@ -217,6 +265,10 @@ class World {
         }
     }
 
+    /**
+     * flip image to other x direction
+     * @param {} mo 
+     */
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
@@ -245,27 +297,43 @@ class World {
         return backgrounds;
     }
 
+    /**
+     * delete items and enemies after victory / loss
+     */
     clearLevel() {
         this.level.enemies.splice(0, this.level.enemies.length);
         this.level.pickables.splice(0, this.level.pickables.length);
     }
 
+    /**
+     * clear all intervals from world
+     */
     clearAllIntervals() {
         this.intervals.forEach((i) => {
             clearInterval(i);
         });
     }
 
+    /**
+     * show game over screen in canvas
+     */
     showGameOver() {
         this.prepareForEndScreen('./img/9_intro_outro_screens/game_over/oh no you lost!.png');
         document.getElementById('muteButton').innerHTML = '';
     }
 
+    /**
+     * show win screen in canvas
+     */
     showWin() {
         this.prepareForEndScreen('./img/icons/medal.png');
         document.getElementById('muteButton').innerHTML = '';
     }
 
+    /**
+     * finish world animations and intervals - go back to start screen
+     * @param {} img 
+     */
     prepareForEndScreen(img) {
         cancelAnimationFrame(this.animationFrame);
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -275,6 +343,10 @@ class World {
         this.changeScreen();
     }
 
+    /**
+     * reset canvas and place end screen img in canvas
+     * @param {img} img 
+     */
     confEndScreen(img) {
         this.end_screen.loadImage(img);
         this.end_screen.width = this.canvas.width;
@@ -285,6 +357,9 @@ class World {
         document.getElementById('ingame-controls').style.display = 'none';
     }
 
+    /**
+     * change screen from canvas to start screen
+     */
     changeScreen() {
         setTimeout(() => {
             document.getElementById('startScreen').style.display = 'block';

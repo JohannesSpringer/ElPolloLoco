@@ -10,6 +10,9 @@ class MovableObject extends DrawableObject {
     intervalGravity;
     animateInterval;
 
+    /**
+     * set gravity to movable objects when they are above ground
+     */
     applyGravitiy() {
         this.intervalGravity = setInterval(() => {
             if (this.isAboveGround() || this.speedY < 0) {
@@ -19,6 +22,10 @@ class MovableObject extends DrawableObject {
         }, 1000 / 25);
     }
 
+    /**
+     * check movable object y value above ground y value
+     * @returns movable object is above ground
+     */
     isAboveGround() {
         if (this instanceof ThrowableObject || this.isDead()) { // Throwable object should always fall and dead character
             return true;
@@ -27,7 +34,11 @@ class MovableObject extends DrawableObject {
         }
     }
 
-    // character.isColliding(chicken);
+    /**
+     * check colission between movable ojects
+     * @param {MovableObject} mo 
+     * @returns collision between movable objects
+     */
     isColliding(mo) {
         return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
             this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
@@ -35,6 +46,9 @@ class MovableObject extends DrawableObject {
             this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
     }
 
+    /**
+     * hit for movable object - only used for character
+     */
     hit() {
         this.energy -= 5;
         if (this.energy < 0) {
@@ -44,9 +58,13 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    /**
+     * check if character was hit in the last 100ms
+     * @returns hit character again
+     */
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit; // time difference in ms
-        return timepassed < 100; // Wenn innerhalb der letzten 1500ms getroffen, dann true
+        return timepassed < 100; // Wenn innerhalb der letzten 100ms getroffen, dann true
     }
 
     isDead() {
@@ -77,6 +95,11 @@ class MovableObject extends DrawableObject {
         this.timeLastAction = new Date().getTime();
     }
 
+    /**
+     * 
+     * @param {MovableObject} mo 
+     * @returns is chicken hit by character
+     */
     hitChicken(mo) {
         return this.x + this.width > mo.x &&
             this.y + this.height > mo.y &&
@@ -84,12 +107,21 @@ class MovableObject extends DrawableObject {
             this.y < mo.y + mo.height;
     }
 
+    /**
+     * check if character is over enemy and is able to kill the enemy
+     * @param {MovableObject} enemy 
+     * @returns 
+     */
     isOverEnemy(enemy) {
         return this.y + this.height - this.offset.bottom < enemy.y + enemy.offset.top &&
             this.x + this.width - this.offset.right > enemy.x + enemy.offset.left &&
             this.x + this.offset.left < enemy.x + enemy.width - enemy.offset.right;
     }
 
+    /**
+     * kill enemy and delete it from world.level
+     * @param {Level} lvl 
+     */
     kill(lvl) {
         this.energy = 0;
         this.img = this.IMAGE_DEAD;

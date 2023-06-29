@@ -64,6 +64,9 @@ class Endboss extends MovableObject {
         this.animate();
     }
 
+    /**
+     * animations for endboss chicken - change animation img only by imgId
+     */
     animate() {
         this.animateInterval = setInterval(() => {
             if (this.imgId == 'walk') this.playAnimation(this.IMAGES_WALKING);
@@ -78,18 +81,29 @@ class Endboss extends MovableObject {
         this.moveLeft();
     }
 
+    /**
+     * endboss attacks and move left to character
+     */
     attack() {
         this.speed = 15;
         this.imgId = 'attack';
         this.moveLeft();
     }
 
+    /**
+     * hurt endboss when hit by bottle - hit with jump not possible
+     */
     hitEndboss() {
         this.energy -= 20;
         this.imgId = 'hurt';
         if (this.isDead()) this.currentImage = 0;
     }
 
+    /**
+     * check endboss hit by bottle
+     * @param {ThrowableObject} bottle 
+     * @returns if endboss is hit by bottle
+     */
     endbossIsHitByBottle(bottle) {
         return bottle.x + bottle.width > this.x &&
             bottle.y < this.y + this.height &&

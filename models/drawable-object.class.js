@@ -19,6 +19,10 @@ class DrawableObject {
         this.img.src = path;
     }
 
+    /**
+     * draw image to canvas - log error if img not available
+     * @param {canvas} ctx 
+     */
     draw(ctx) {
         try {
             ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
@@ -28,7 +32,7 @@ class DrawableObject {
         }
     }
 
-    // draw frame to check hitbox
+    // draw frame to check img size - only for debugging
     drawFrame(ctx) {
         if (this instanceof Character || this instanceof Chicken) {
             ctx.beginPath();
@@ -39,6 +43,7 @@ class DrawableObject {
         }
     }
 
+    // draw frame to check hitbox - only for debugging
     drawSmallFrame(ctx) {
         if (this instanceof Character || this instanceof Chicken || this instanceof Endboss || this instanceof PickableObject) {
             ctx.beginPath();

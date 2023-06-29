@@ -20,12 +20,20 @@ class StatusBarHealth extends DrawableObject {
         this.setPercentage(100);
     }
 
+    /**
+     * update status bar level
+     * @param {int} percentage 
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
+    /**
+     * 
+     * @returns current img index
+     */
     resolveImageIndex() {
         if (this.percentage == 100) {
             return 5;

@@ -29,6 +29,10 @@ class ThrowableObject extends MovableObject {
         this.throw(direction);
     }
 
+    /**
+     * throw bottle with character in moving direction
+     * @param {boolean} dir 
+     */
     throw(dir) {
         this.speedY = -20;
         this.speed = 10;
