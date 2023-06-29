@@ -49,13 +49,13 @@ class World {
 
     run() {
         this.runInt = setInterval(() => {
-            this.checkCollisions();
-            this.checkItemsToPick();
-            this.checkThrowObjects();
             this.checkEndboss();
             this.toggleAudios();
             this.checkCharacater();
-        }, 200);
+            this.checkCollisions();
+            this.checkItemsToPick();
+            this.checkThrowObjects();
+        }, 100);
         this.intervals.push(this.runInt);
     }
 
@@ -119,7 +119,7 @@ class World {
             clearInterval(this.throwedBottle.intervalGravity);
             this.throwableObjects.splice(0, 1);
             this.throwedBottle = undefined;
-        }, 160);
+        }, 90);
     }
 
     checkItemsToPick() {
@@ -140,7 +140,7 @@ class World {
             this.bottleInAir = true;
             setTimeout(() => {
                 this.bottleInAir = false;
-            }, 1000); // only throw every 1000ms 1 bottle
+            }, 500); // only throw every 500ms 1 bottle
         }
     }
 
@@ -151,7 +151,7 @@ class World {
                 enemy.isInDanger = true;
             } else if (this.character.isColliding(enemy) && enemy.isInDanger) {
                 this.killEnemy(enemy);
-                break;
+                return;
             } else if (this.character.isColliding(enemy) && !this.character.isDead() && !enemy.isDead()) {
                 this.hitCharacter();
             } else {

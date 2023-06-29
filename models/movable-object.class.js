@@ -46,7 +46,7 @@ class MovableObject extends DrawableObject {
 
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit; // time difference in ms
-        return timepassed < 200; // Wenn innerhalb der letzten 1500ms getroffen, dann true
+        return timepassed < 100; // Wenn innerhalb der letzten 1500ms getroffen, dann true
     }
 
     isDead() {
@@ -85,9 +85,9 @@ class MovableObject extends DrawableObject {
     }
 
     isOverEnemy(enemy) {
-        return this.y + this.height < enemy.y &&
-            this.x + this.width > enemy.x &&
-            this.x < enemy.x + enemy.width;
+        return this.y + this.height - this.offset.bottom < enemy.y + enemy.offset.top &&
+            this.x + this.width - this.offset.right > enemy.x + enemy.offset.left &&
+            this.x + this.offset.left < enemy.x + enemy.width - enemy.offset.right;
     }
 
     kill(lvl) {
