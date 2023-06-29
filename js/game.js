@@ -12,6 +12,9 @@ let muteIds = [
     'audioImgIngame'
 ];
 
+/**
+ * initialize start screen, canvas and keybindings
+ */
 function init() {
     renderStartScreen();
     canvas = document.getElementById('canvas');
@@ -23,6 +26,9 @@ function init() {
     setTimeout(playIntro(), 1500);
 }
 
+/**
+ * html template start screen
+ */
 function renderStartScreen() {
     let screen = document.getElementById('startScreen');
     screen.innerHTML = `
@@ -34,10 +40,17 @@ function renderStartScreen() {
         </div>`;
 }
 
+/**
+ * play intro audio
+ */
 function playIntro() {
     audios.intro_sound.play();
 }
 
+/**
+ * create world and switch from start screen to canvas
+ * used again to replay (regenerate world)
+ */
 function createWorld() {
     world = new World(canvas, keyboard);
     document.getElementById('startScreen').style.display = 'none';
@@ -46,13 +59,6 @@ function createWorld() {
     renderMuteButton();
     audios.intro_sound.pause();
     audios.intro_sound.currentTime = 0;
-}
-
-function deleteWorldProperties() {
-    if (world == undefined) return;
-    Object.keys(world).forEach(property => {
-        delete world[property];
-    });
 }
 
 function showControls() {
