@@ -27,6 +27,9 @@ class Chicken extends MovableObject {
         this.animate();
     };
 
+    /**
+     * animate move and dead animations of chickens
+     */
     animate() {
         setInterval(() => {
             if (!this.isDead()) {

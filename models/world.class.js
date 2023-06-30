@@ -47,6 +47,9 @@ class World {
         });
     }
 
+    /**
+     * add intervals to array
+     */
     addIntervalsToArray() {
         this.character.intervals.forEach((int) => {
             this.intervals.push(int);
@@ -205,12 +208,19 @@ class World {
         };
     }
 
+    /**
+     * character get damage and play sound and set health status bar img
+     */
     hitCharacter() {
         this.character.hit();
         this.character.audios.get_damage_sound.play();
         this.statusBarHealth.setPercentage(this.character.energy);
     }
 
+    /**
+     * delete specific enemy and play kill sound and let character jump again
+     * @param {Object} e 
+     */
     killEnemy(e) {
         e.kill(this.level);
         this.character.audios.chicken_kill_sound.play();
@@ -244,6 +254,10 @@ class World {
         });
     }
 
+    /**
+     * add object array to canvas
+     * @param {Object} obj 
+     */
     addObjectsToMap(obj) {
         obj.forEach(o => {
             this.addToMap(o);
@@ -276,11 +290,19 @@ class World {
         this.ctx.scale(-1, 1);
     }
 
+    /**
+     * flip image back in x direction
+     * @param {Object} mo 
+     */
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();
     }
 
+    /**
+     * load backgrounds images
+     * @returns background object images
+     */
     getBackrounds() {
         let backgrounds = [];
         for (let i = 0; i < 10; i++) {

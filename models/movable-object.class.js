@@ -67,10 +67,18 @@ class MovableObject extends DrawableObject {
         return timepassed < 100; // Wenn innerhalb der letzten 100ms getroffen, dann true
     }
 
+    /**
+     * 
+     * @returns movable object is dead
+     */
     isDead() {
         return this.energy == 0;
     }
 
+    /**
+     * animate movable objects
+     * @param {Object} images 
+     */
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];
@@ -78,19 +86,31 @@ class MovableObject extends DrawableObject {
         this.currentImage++;
     }
 
+    /**
+     * start move right action of movable object
+     */
     moveRight() {
         this.x += this.speed;
     }
 
+    /**
+     * start move left action of movable object
+     */
     moveLeft() {
         this.x -= this.speed;
     }
 
+    /**
+     * start jump action of movable object
+     */
     jump() {
         this.speedY = -30;
         this.currentImage = 0;
     }
 
+    /**
+     * get time and save for last action done
+     */
     setTimerLastAction() {
         this.timeLastAction = new Date().getTime();
     }

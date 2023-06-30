@@ -332,11 +332,41 @@ canvas {
         display: none !important;
     }
 
-    /* h1 {
-        display: none;
-    } */
-
     .overlay {
         display: flex;
+    }
+
+    .controls-button {
+        font-size: 20px;
+    }
+
+    .start-button {
+        font-size: 20px;
+    }
+
+    .options-button {
+        font-size: 20px;
+    }
+
+    .controls {
+        height: 100%;
+        gap: 16px;
+    }
+
+    .controls-info {
+        gap: 40px;
+        height: 40px;
+        font-size: 20px;
+        width: 60%;
+    }
+
+    .controls-item {
+        width: 56px;
+        font-size: inherit;
+        height: 40px;
+    }
+
+    .controls-description {
+        font-size: inherit;
     }
 }

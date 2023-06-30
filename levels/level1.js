@@ -1,5 +1,9 @@
 let level1;
 
+/**
+ * initialize level
+ * @returns enemies, items, clouds, backgrounds and x position end of level
+ */
 function initLvl() {
     return level1 = new Level(
         getEnemies(),
@@ -30,6 +34,10 @@ function getBackrounds() {
     return backgrounds;
 }
 
+/**
+ * create enemies
+ * @returns enemies chickens and endboss
+ */
 function getEnemies() {
     return [
         new Chicken(),
@@ -50,6 +58,10 @@ function getEnemies() {
     ];
 }
 
+/**
+ * create items to pick
+ * @returns coin and bottle items
+ */
 function getPickables() {
     return [
         new PickableObject('coin'),
@@ -83,6 +95,10 @@ function getPickables() {
     ];
 }
 
+/**
+ * create background clouds
+ * @returns clouds
+ */
 function getClouds() {
     return [
         new Cloud(),

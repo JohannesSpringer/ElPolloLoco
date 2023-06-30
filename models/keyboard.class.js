@@ -21,6 +21,9 @@ class Keyboard {
         this.keyD();
     }
 
+    /**
+     * bind mobile button left to key left
+     */
     keyLeft() {
         document.getElementById('btnLeft').addEventListener('touchstart', (e) => {
             e.preventDefault();
@@ -33,6 +36,9 @@ class Keyboard {
         });
     }
 
+    /**
+     * bind mobile button right to key right
+     */
     keyRight() {
         document.getElementById('btnRight').addEventListener('touchstart', (e) => {
             e.preventDefault();
@@ -45,6 +51,9 @@ class Keyboard {
         });
     }
 
+    /**
+     * bind mobile button jumpg to key space
+     */
     keySpace() {
         document.getElementById('btnJump').addEventListener('touchstart', (e) => {
             e.preventDefault();
@@ -57,6 +66,9 @@ class Keyboard {
         });
     }
 
+    /**
+     * bind mobile button throw to key D
+     */
     keyD() {
         document.getElementById('btnThrow').addEventListener('touchstart', (e) => {
             e.preventDefault();

@@ -152,6 +152,10 @@ class Character extends MovableObject {
         this.intervals.push(intId);
     }
 
+    /**
+     * 
+     * @returns jump key pressed and character is at ground
+     */
     canJump() {
         return this.world.keyboard.SPACE && !this.isAboveGround();
     }
@@ -165,10 +169,17 @@ class Character extends MovableObject {
         this.setTimerLastAction();
     }
 
+    /**
+     * 
+     * @returns right arrow key pressed and character is not at level end x
+     */
     canMoveRight() {
         return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x;
     }
 
+    /**
+     * move character in right direction
+     */
     movingRight() {
         this.moveRight();
         this.otherDirection = false;
@@ -176,10 +187,17 @@ class Character extends MovableObject {
         this.setTimerLastAction();
     }
 
+    /**
+     * 
+     * @returns left arrow key pressed and character is not at level start
+     */
     canMoveLeft() {
         return this.world.keyboard.LEFT && this.x > 0;
     }
 
+    /**
+     * move character in left direction
+     */
     movingLeft() {
         this.moveLeft();
         this.otherDirection = true;
@@ -187,6 +205,10 @@ class Character extends MovableObject {
         this.setTimerLastAction();
     }
 
+    /**
+     * show dead animation img of character
+     * @param {number} intId interval id of slow animations
+     */
     killCharacter(intId) {
         this.speedY = -15;
         this.audios.dying_sound.play();
@@ -195,6 +217,9 @@ class Character extends MovableObject {
         if (this.currentImage == (this.IMAGES_DEAD.length - 1)) clearInterval(intId);
     }
 
+    /**
+     * check activity time of characater and going idle or long idle
+     */
     goingIdle() {
         let now = new Date().getTime();
         if (now > this.timeLastAction + 3000) {
@@ -204,6 +229,10 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     * 
+     * @returns arrow left or arrow right is pressed
+     */
     isWalking() {
         return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
     }
@@ -240,6 +269,9 @@ class Character extends MovableObject {
             this.world.camera_x = -this.x + 100;
     }
 
+    /**
+     * check status of character and play walk or idle animation
+     */
     checkMovement() {
         if (this.isWalking()) {
             // walk animation

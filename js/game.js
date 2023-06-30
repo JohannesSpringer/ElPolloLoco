@@ -107,6 +107,9 @@ function showControls() {
         </div>`;
 }
 
+/**
+ * render start screen
+ */
 function renderStart() {
     renderStartScreen();
 }

@@ -13,7 +13,10 @@ class DrawableObject {
         bottom: 0
     };
 
-
+    /**
+     * load image in instance
+     * @param {URL} path to image
+     */
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
